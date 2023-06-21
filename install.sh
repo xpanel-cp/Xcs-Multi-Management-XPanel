@@ -16,7 +16,7 @@ adminuser=$(mysql -N -e "use Xcs; select adminuser from setting where id='1';")
 adminpass=$(mysql -N -e "use Xcs; select adminpassword from setting where id='1';")
 clear
 
-linkd=https://api.github.com/repos/Alirezad07/Xcs-Multi-Management-XPanel/releases/tag/xcsv1-0
+linkd=https://api.github.com/repos/Alirezad07/Xcs-Multi-Management-XPanel/releases/latest
 
 if [ "$dmp" != "" ]; then
 defdomain=$dmp
@@ -286,7 +286,7 @@ wait
 curl $protcohttp://${defdomain}/xcs/reinstall
 clear
 
-echo -e "${YELLOW}************ Xcs Multi Management of XPanel ************ \n"
-echo -e "Xcs Panel : $protcohttp://${defdomain}/cxs/login \n"
-echo -e "Username : ${adminusername} \n"
-echo -e "Password : ${adminpassword} \n"
+echo -e "************ Xcs Multi Management of XPanel ************ "
+echo -e "Xcs Panel : $protcohttp://${defdomain}/cxs/login "
+echo -e "Username : ${adminusername} "
+echo -e "Password : ${adminpassword} "
