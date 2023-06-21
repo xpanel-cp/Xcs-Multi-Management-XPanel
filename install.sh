@@ -16,7 +16,7 @@ adminuser=$(mysql -N -e "use Xcs; select adminuser from setting where id='1';")
 adminpass=$(mysql -N -e "use Xcs; select adminpassword from setting where id='1';")
 clear
 
-linkd=https://api.github.com/repos/Alirezad07/Xcs-Multi-Management-XPanel/releases/tag/xcsv1-0
+linkd=https://api.github.com/repos/Alirezad07/Xcs-Multi-Management-XPanel/releases/latest
 
 if [ "$dmp" != "" ]; then
 defdomain=$dmp
