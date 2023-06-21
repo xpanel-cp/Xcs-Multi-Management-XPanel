@@ -1,0 +1,7 @@
+#!/bin/bash
+#By Alireza
+
+sudo passwd $1 <<!
+$2
+$2
+!

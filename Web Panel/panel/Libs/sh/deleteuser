@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo killall -u $1
+wait
+sudo userdel -r $1

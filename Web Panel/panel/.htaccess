@@ -1,0 +1,13 @@
+Options +FollowSymLinks
+RewriteEngine on
+Options -indexes
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^(.+)$ index.php?url=$1 "[B= ?,L]"
+
+
+#<Filesmatch ".(php)$" >
+#order deny,allow
+#deny from all
