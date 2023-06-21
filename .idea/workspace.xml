@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e45a5a35-fd5e-4620-9a77-d5810df3c2ff" name="Changes" comment="">
+    <list default="true" id="e45a5a35-fd5e-4620-9a77-d5810df3c2ff" name="Changes" comment="XCS Multi Management of XPanel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Panel/panel/Config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/install.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Config/define.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Config/define.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +41,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1687375065729</updated>
-      <workItem from="1687375066885" duration="1869000" />
+      <workItem from="1687375066885" duration="2516000" />
     </task>
+    <task id="LOCAL-00001" summary="XCS Multi Management of XPanel">
+      <created>1687376983409</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1687376983409</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -58,5 +66,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="XCS Multi Management of XPanel" />
+    <option name="LAST_COMMIT_MESSAGE" value="XCS Multi Management of XPanel" />
   </component>
 </project>
