@@ -1,8 +1,7 @@
 <?php
-$port = "22";
 $username = "admin";
 $password = "123456";
-$dbname = "XPanel";
+$dbname = "Xcs";
 $lang = "fa-ir";
 
 define("DB_TYPE", "mysql");

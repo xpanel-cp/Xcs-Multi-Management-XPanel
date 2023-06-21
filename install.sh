@@ -12,16 +12,11 @@ then echo "Please run as root"
 exit
 fi
 rm -rf /error.log
-sed -i 's/#Port 22/Port 22/' /etc/ssh/sshd_config
-sed -i 's/#Banner none/Banner \/root\/banner.txt/g' /etc/ssh/sshd_config
-sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
-po=$(cat /etc/ssh/sshd_config | grep "^Port")
-port=$(echo "$po" | sed "s/Port //g")
-adminuser=$(mysql -N -e "use XPanel; select adminuser from setting where id='1';")
-adminpass=$(mysql -N -e "use XPanel; select adminpassword from setting where id='1';")
+adminuser=$(mysql -N -e "use Xcs; select adminuser from setting where id='1';")
+adminpass=$(mysql -N -e "use Xcs; select adminpassword from setting where id='1';")
 clear
 
-linkd=https://api.github.com/repos/Alirezad07/X-Panel-SSH-User-Management/releases/tags/xpanelv34
+linkd=https://api.github.com/repos/Alirezad07/Xcs-Multi-Management-XPanel/releases/tag/xcsv1-0
 
 if [ "$dmp" != "" ]; then
 defdomain=$dmp
@@ -292,6 +287,6 @@ curl $protcohttp://${defdomain}/xcs/reinstall
 clear
 
 echo -e "${YELLOW}************ Xcs Multi Management of XPanel ************ \n"
-echo -e "XPanel Link : $protcohttp://${defdomain}/cxs/login \n"
+echo -e "Xcs Panel : $protcohttp://${defdomain}/cxs/login \n"
 echo -e "Username : ${adminusername} \n"
 echo -e "Password : ${adminpassword} \n"
