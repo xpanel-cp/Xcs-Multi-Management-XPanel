@@ -286,7 +286,7 @@ wait
 curl $protcohttp://${defdomain}/xcs/reinstall
 clear
 
-echo -e "${YELLOW}************ Xcs Multi Management of XPanel ************ \n"
-echo -e "Xcs Panel : $protcohttp://${defdomain}/cxs/login \n"
-echo -e "Username : ${adminusername} \n"
-echo -e "Password : ${adminpassword} \n"
+echo -e "************ Xcs Multi Management of XPanel ************ "
+echo -e "Xcs Panel : $protcohttp://${defdomain}/cxs/login "
+echo -e "Username : ${adminusername} "
+echo -e "Password : ${adminpassword} "
