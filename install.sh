@@ -264,7 +264,7 @@ sudo sed -i "s/SERVERUSER/$adminusername/g" /var/www/html/xcs/Libs/sh/killusers.
 wait
 sudo sed -i "s/SERVERPASSWORD/$adminpassword/g" /var/www/html/xcs/Libs/sh/killusers.sh &
 wait
-curl -u "$adminusername:$adminpassword" "$protcohttp://${defdomain}:$sshttp/reinstall"
+curl -u "$adminusername:$adminpassword" "$protcohttp://${defdomain}/panel/reinstall"
 wait
 
 chmod 777 /var/www/html/xcs/storage
@@ -283,10 +283,10 @@ chmod 777 /var/www/html/xcs/Libs/sh
 wait
 chmod 777 /var/www/html/xcs/assets/js/config.js
 wait
-curl $protcohttp://${defdomain}/xcs/reinstall
+curl $protcohttp://${defdomain}/panel/reinstall
 clear
 
 echo -e "************ Xcs Multi Management of XPanel ************ "
-echo -e "Xcs Panel : $protcohttp://${defdomain}/cxs/login "
+echo -e "Xcs Panel : $protcohttp://${defdomain}/panel/login "
 echo -e "Username : ${adminusername} "
 echo -e "Password : ${adminpassword} "
