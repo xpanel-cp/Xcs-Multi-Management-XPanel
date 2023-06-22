@@ -256,34 +256,34 @@ mysql -e "CREATE USER '${adminusername}'@'localhost' IDENTIFIED BY '${adminpassw
 wait
 mysql -e "GRANT ALL ON *.* TO '${adminusername}'@'localhost';" &
 wait
-sudo sed -i "s/adminuser/$adminusername/g" /var/www/html/xcs/Config/database.php &
+sudo sed -i "s/adminuser/$adminusername/g" /var/www/html/panel/Config/database.php &
 wait
-sudo sed -i "s/adminpass/$adminpassword/g" /var/www/html/xcs/Config/database.php &
+sudo sed -i "s/adminpass/$adminpassword/g" /var/www/html/panel/Config/database.php &
 wait
-sudo sed -i "s/SERVERUSER/$adminusername/g" /var/www/html/xcs/Libs/sh/killusers.sh &
+sudo sed -i "s/SERVERUSER/$adminusername/g" /var/www/html/panel/Libs/sh/killusers.sh &
 wait
-sudo sed -i "s/SERVERPASSWORD/$adminpassword/g" /var/www/html/xcs/Libs/sh/killusers.sh &
+sudo sed -i "s/SERVERPASSWORD/$adminpassword/g" /var/www/html/panel/Libs/sh/killusers.sh &
 wait
 curl -u "$adminusername:$adminpassword" "$protcohttp://${defdomain}:$sshttp/reinstall"
 wait
 
-chmod 777 /var/www/html/xcs/storage
+chmod 777 /var/www/html/panel/storage
 wait
-chmod 777 /var/www/html/xcs/storage/log
+chmod 777 /var/www/html/panel/storage/log
 wait
-chmod 777 /var/www/html/xcs/storage/backup
+chmod 777 /var/www/html/panel/storage/backup
 wait
-chmod 777 /var/www/html/xcs/Config/database.php
+chmod 777 /var/www/html/panel/Config/database.php
 wait
-chmod 777 /var/www/html/xcs/Config/define.php
+chmod 777 /var/www/html/panel/Config/define.php
 wait
-chmod 777 /var/www/html/xcs/Libs
+chmod 777 /var/www/html/panel/Libs
 wait
-chmod 777 /var/www/html/xcs/Libs/sh
+chmod 777 /var/www/html/panel/Libs/sh
 wait
-chmod 777 /var/www/html/xcs/assets/js/config.js
+chmod 777 /var/www/html/panel/assets/js/config.js
 wait
-curl $protcohttp://${defdomain}/xcs/reinstall
+curl $protcohttp://${defdomain}/panel/reinstall
 clear
 
 echo -e "************ Xcs Multi Management of XPanel ************ "
