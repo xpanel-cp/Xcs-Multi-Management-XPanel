@@ -49,7 +49,6 @@ read passwordtmp
 if [[ -n "${passwordtmp}" ]]; then
 adminpassword=${passwordtmp}
 fi
-fi
 
 ipv4=$(curl -sm8 ipv4.icanhazip.com)
 sudo sed -i '/www-data/d' /etc/sudoers &
