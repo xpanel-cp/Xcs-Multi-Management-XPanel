@@ -1,4 +1,36 @@
+<?php
+if (isset($_COOKIE["xcskey"])) {
+            $key_login = explode(':', $_COOKIE["xcskey"]);
+            $Ukey=$key_login[0];
+            $Pkey=$key_login[1];
+    try {
+        $conn = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
 
+    $query = $conn->prepare("select * from setting where adminuser='" .$Ukey. "' and login_key='" .$_COOKIE["xcskey"]. "'");
+    $query->execute();
+    $queryCount = $query->rowCount();
+    $query_ress = $conn->prepare("select * from admins where username_u='" . $Ukey . "' and login_key='" . $_COOKIE["xcskey"] . "'");
+    $query_ress->execute();
+    $queryCount_ress = $query_ress->rowCount();
+    if ($queryCount >0) {
+        define('permis','admin');
+    }
+    if ($queryCount_ress >0) {
+        define('permis','reseller');
+        $query = $conn->prepare("select * from admins where username_u='$Ukey'");
+        $query->execute();
+        $queryres = $query->fetch();
+    }
+
+
+        }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- [Head] start -->
@@ -12,7 +44,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- [Favicon] icon -->
-    <link rel="icon" href="<?php echo path ?>assets/images/xlogo.png" type="image/x-icon">
+    <link rel="icon" href="<?php echo path ?>assets/images/xcslogo.png" type="image/x-icon">
     <!-- [Font] Family -->
     <link rel="stylesheet" href="<?php echo path ?>assets/fonts/inter/inter.css" id="main-font-link" />
 
@@ -49,7 +81,7 @@
         <div class="m-header">
             <a href="#" class="b-brand text-primary">
                 <!-- ========   Change your logo from here   ============ -->
-                <img src="<?php echo path ?>assets/images/xlogo.png" alt="Xpanel" style="width:50px"/>
+                <img src="<?php echo path ?>assets/images/xcslogo.png" alt="Xcs" style="width:50px"/>
                 <span class="badge bg-light-success rounded-pill ms-2 theme-version" style="font-size: 13px;"></span>
             </a>
         </div>
@@ -61,8 +93,11 @@
                             <img src="<?php echo path ?>assets/images/user/avatar-1.jpg" alt="user-image" class="user-avtar wid-45 rounded-circle" />
                         </div>
                         <div class="flex-grow-1 ms-3 me-2">
-                            <h6 class="mb-0">Admin</h6>
-                            <small><?php echo admin_lang;?></small>
+                            <h6 class="mb-0"><?php echo ucfirst($Ukey);?></h6>
+                            <?php if(permis=='reseller'){?>
+                            <small><?php echo modal_credit_admin_lang;?>: <?php echo number_format($queryres['credit_u']);?></small>
+                            <?php } ?>
+
                         </div>
                         <a class="btn btn-icon btn-link-secondary avtar" data-bs-toggle="collapse" href="#pc_sidebar_userlink">
                             <svg class="pc-icon">
@@ -86,13 +121,13 @@
             </div>
 
             <ul class="pc-navbar">
-                
+                <?php if(permis!='reseller') {?>
                 <li class="pc-item">
                     <a href="index" class="pc-link">
                         <i data-feather="airplay"></i>
                         <span class="pc-mtext"><?php echo dashboard_lang;?></span>
                     </a>
-                </li>
+                </li><?php }?>
 
                 <li class="pc-item">
                     <a href="users" class="pc-link">
@@ -100,17 +135,7 @@
                         <span class="pc-mtext"><?php echo users_lang;?></span>
                     </a>
                 </li>
-
-                <li class="pc-item">
-                    <a href="online" class="pc-link">
-            <span class="pc-micon">
-              <svg class="pc-icon">
-                <use xlink:href="#custom-story"></use>
-              </svg>
-            </span>
-                        <span class="pc-mtext"><?php echo online_users_lang;?></span>
-                    </a>
-                </li>
+                <?php if(permis!='reseller') {?>
                 <li class="pc-item pc-caption">
                     <label><?php echo other_more_lang;?></label>
                     <i class="ti ti-chart-arcs"></i>
@@ -129,6 +154,19 @@
                     </a>
                 </li>
 
+                <li class="pc-item">
+                    <a href="packages" class="pc-link">
+                        <i data-feather="package"></i>
+                        <span class="pc-mtext"><?php echo package_name_lang;?></span>
+                    </a>
+                </li>
+<?php } ?>
+                <li class="pc-item">
+                    <a href="transaction" class="pc-link">
+                        <i data-feather="credit-card"></i>
+                        <span class="pc-mtext"><?php echo transaction_name_lang;?></span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

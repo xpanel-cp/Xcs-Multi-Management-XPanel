@@ -1,5 +1,4 @@
 <?php
-
 class View
 {
     function __construct()
@@ -10,6 +9,7 @@ class View
 
     function Render($name, $data = null)
     {
+
         $name = ucfirst($name);
         if ($name != 'Login/index') {
             require_once("Views/Header.php");

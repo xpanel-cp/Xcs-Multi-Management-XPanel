@@ -2,8 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e45a5a35-fd5e-4620-9a77-d5810df3c2ff" name="Changes" comment="XCS Multi Management of XPanel">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/install.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/.idea/Xcs-Multi-Management-XPanel.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Controllers/Api.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Controllers/Api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Controllers/Checkip.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Controllers/Checkip.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Controllers/Edituser.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Controllers/Edituser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Controllers/Fixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Controllers/Fixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Controllers/Managers.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Controllers/Managers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Controllers/Online.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Controllers/Settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Controllers/Settings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Controllers/Users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Libs/View.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Libs/View.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Libs/lang/en-us.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Libs/lang/en-us.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Libs/lang/fa-ir.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Libs/lang/fa-ir.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Models/Api_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Models/Api_Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Models/Edituser_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Models/Edituser_Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Models/Fixer_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Models/Fixer_Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Models/Index_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Models/Index_Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Models/Login_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Models/Login_Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Models/Managers_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Models/Managers_Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Models/Permission_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Models/Permission_Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Models/Reinstall_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Models/Reinstall_Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Models/Settings_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Models/Settings_Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Models/Users_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Models/Users_Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Views/Checkip/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Views/Checkip/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Views/Document/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Views/Document/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Views/Footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Views/Footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Views/Header.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Views/Header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Views/Login/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Views/Login/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Views/Managers/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Views/Managers/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Views/Settings/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Views/Settings/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Views/Settings/backup.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Views/Settings/backup.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Views/Settings/multiserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Views/Settings/multiserver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Views/Users/edituser.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Views/Users/edituser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/Views/Users/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/Views/Users/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/assets/css/style-en-us.css" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/assets/css/style-en-us.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/assets/css/style-fa-ir.css" beforeDir="false" afterPath="$PROJECT_DIR$/Web Panel/panel/assets/css/style-fa-ir.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Panel/panel/storage/backup/index.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +66,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Web Panel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -41,6 +78,7 @@
       <option name="presentableId" value="Default" />
       <updated>1687375065729</updated>
       <workItem from="1687375066885" duration="3967000" />
+      <workItem from="1688526550522" duration="47000" />
     </task>
     <task id="LOCAL-00001" summary="XCS Multi Management of XPanel">
       <created>1687376983409</created>

@@ -33,13 +33,16 @@ class Reinstall_Model extends Model
 						traffic   VARCHAR(100) NULL,
 						info   VARCHAR(100) NULL,
 						customer_user   VARCHAR(100) NULL,
+						change_server   VARCHAR(100) NULL,
 						PRIMARY KEY(id)
 				);',
             'CREATE TABLE servers(
 							id  INT AUTO_INCREMENT,
-							link  VARCHAR(100) NOT NULL,
+							link VARCHAR(100) NOT NULL,
 							token VARCHAR(100) NULL,
-							name   VARCHAR(100) NULL,
+							name VARCHAR(100) NULL,
+							port_connection VARCHAR(100) NULL,
+							port_connection_tls VARCHAR(100) NULL,
 							PRIMARY KEY(id)
 					);',
             'CREATE TABLE ApiToken(
@@ -64,13 +67,18 @@ class Reinstall_Model extends Model
 								title VARCHAR(100) NOT NULL,
 								amount VARCHAR(100) NULL,
 								day VARCHAR(100) NULL,
+								multi VARCHAR(100) NULL,
+								server VARCHAR(100) NULL,
+								traffic VARCHAR(100) NULL,
+								multiuser VARCHAR(100) NULL,
 								PRIMARY KEY(id)
 						);',
-            'CREATE TABLE transaction (
+            'CREATE TABLE trans_reseller (
 								id  INT AUTO_INCREMENT,
-								desc VARCHAR(100) NOT NULL,
-								amount VARCHAR(100) NULL,
+								desc_trans VARCHAR(100) NOT NULL,
+								amount_trans VARCHAR(100) NULL,
 								date_time VARCHAR(100) NULL,
+								username_trans VARCHAR(100) NULL,
 								PRIMARY KEY(id)
 						);',
             'CREATE TABLE Traffic(

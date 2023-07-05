@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <!-- [Favicon] icon -->
-  <link rel="icon" href="<?php echo path ?>assets/images/xlogo.png" type="image/x-icon">
+  <link rel="icon" href="<?php echo path ?>assets/images/xcslogo.png" type="image/x-icon">
  <!-- [Font] Family -->
 <link rel="stylesheet" href="<?php echo path ?>assets/fonts/inter/inter.css" id="main-font-link" />
 
@@ -47,7 +47,7 @@
           <div class="card-body">
               <form action="" method="post" enctype="multipart/form-data" >
               <div class="text-center">
-              <a href="#"><img src="<?php echo path ?>assets/images/xlogo.png" alt="XPanel" style="width: 60px; margin-bottom: 30px;"></a>
+              <a href="#"><img src="<?php echo path ?>assets/images/xcslogo.png" alt="Xcs" style="width: 60px; margin-bottom: 30px;"></a>
 
             </div>
             <div class="form-group mb-3">

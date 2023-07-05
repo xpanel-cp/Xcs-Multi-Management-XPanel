@@ -7,7 +7,7 @@
             </div>
             <div class="col-auto my-1">
                 <ul class="list-inline footer-link mb-0">
-                    <li class="list-inline-item"><a href="/documents">API</a></li>
+                    <li class="list-inline-item"><a href="/panel/documents">API</a></li>
                     <li class="list-inline-item"><a href="https://github.com/Alirezad07/X-Panel-SSH-User-Management/blob/main/README-EN.md#supporting-us-hearts">Supporting us</a></li>
                     <li class="list-inline-item"><a href="https://github.com/Alirezad07/X-Panel-SSH-User-Management">GitHub</a></li>
                 </ul>

@@ -15,7 +15,7 @@ define('dashboard_lang','پیشخوان');
 define('users_lang','کاربران');
 define('online_users_lang','کاربران آنلاین');
 define('filtering_status_lang','وضعیت فیلترینگ');
-define('managers_lang','مدیران');
+define('managers_lang','نمایندگان');
 define('settings_lang','تنظیمات');
 define('logut_lang','خروج');
 define('admin_lang','مدیرکل');
@@ -40,12 +40,13 @@ define('new_user_lang','کاربر جدید');
 define('multi_user_new_lang','کاربر عمده');
 define('multi_user_bulk_delete_lang','حذف');
 define('multi_user_renewal_lang','تمدید');
-define('multi_user_renewal_desc_lang','تاریخ ثبت نام از امروز ثبت شود');
+define('user_server_lang','تغییر سرور');
+define('renewal_date_desc_lang','تاریخ ثبت نام از امروز ثبت شود');
+define('renewal_traffic_desc_lang','ترافیک ریست شود');
 define('multi_user_renewal_yes_lang','بله');
 define('multi_user_renewal_no_lang','خیر');
 define('customer_tb_lang','نماینده');
 define('server_tb_lang','سرور');
-define('select_lang','انتخاب کنید');
 define('username_tb_lang','نام کاربری');
 define('password_tb_lang','کلمه عبور');
 define('traffic_tb_lang','ترافیک');
@@ -71,7 +72,7 @@ define('reset_u_act_tb_lang','ریست ترافیک');
 define('delete_u_act_tb_lang','حذف');
 define('edit_tooltip_tb_lang','ویرایش');
 define('share_tooltip_tb_lang','اشتراک گذاری');
-define('share_copyconfig_tb_lang','کپی اطلاعات');
+define('share_copyconfig_tb_lang','لینک اختصاصی کاربر');
 define('share_copynetmod_tb_lang','Netmod');
 define('share_copynv_tb_lang','NV');
 define('modal_username_lang','نام کاربری');
@@ -84,7 +85,7 @@ define('modal_phone_lang','شماره تماس');
 define('modal_phone_lable_lang','شماره تماس را وارد کنید');
 define('modal_multiuser_lang','کاربر همزمان');
 define('modal_multiuser_lable_lang','تعداد کاربران همزمان را وارد کنید');
-define('modal_expdate_lang','تاریخ انقضا (با اولین اتصال)');
+define('modal_expdate_lang','تعداد روز اعتبار اکانت');
 define('modal_expdate_lable_lang','اگر قصد دارید با اولین اتصال تاریخ انقضا برا کاربر ثبت و محاسبه شود تعداد روز اعتبار را در فیلد بالا وارد نمائید');
 define('modal_traffic_lable_lang','ترافیک را وارد نمائید');
 define('modal_expdate2_lang','تاریخ انقضا');
@@ -107,14 +108,24 @@ define('modal_b_char_pass_lable_lang','تعدا کاراکتر کلمه عبور
 define('modal_b_multi_user_lang','کاربر همزمان');
 define('modal_b_multi_user_lable_lang','تعداد کاربران همزمان را وارد کنید');
 define('modal_b_alert_lang','توجه داشته باشید در صورتی که کاربر قبلا ثبت شده باشد سیستم اجازه ثبت را نخواهد داد');
+define('select_lang','انتخاب کنید');
+define('modal_server_lable_lang','جهت ساخت اکانت یک سرور پیش فرض انتخاب کنید');
+define('modal_chserver_lable_lang','جهت تغییر سرور اشتراک کاربر یک سرور انتخاب کند');
+define('modal_credit_admin_lang','اعتبار نمایندگی');
+define('modal_credit_admin_wallet_lang','عدم موجودی کیف پول');
 
 //edit user
 define('edit_user_lang','ویرایش کاربر');
 define('edit_exdate_lang','تاریخ انقضا');
 define('edit_submit_lang','ذخیره');
 
+//change server
+define('user_change_server_error_lang','کاربر در همین سرور قرار دارد لطفا سرور دیگری را انتخاب کنید');
+define('user_change_server_rep_lang','نام کاربری در سرور انتخاب شده وجود دارد');
+define('user_change_server_mod_lang','تغییر سرور از سمت کاربر');
+
 //manager
-define('manager_newuser_lang','مدیر جدید');
+define('manager_newuser_lang','نماینده جدید');
 
 //settings
 define('setting_pass_title_lang','تغییر کلمه عبور');
@@ -158,9 +169,12 @@ define('setting_fakeadd_web_lang','آدرس وب سایت');
 
 //settings multiserver
 define('setting_multiserver_alert_lang','این بخش تا آماده سازی روش اتصال صحیح و آنالیز سرورها از دسترس خارج شده است');
-define('setting_multiserver_ip_lang','لینک XPanel با پوت وارد شود (http://domain:port)');
-define('setting_multiserver_uname_lang','توکن API را وارد نمائید');
+define('setting_multiserver_ip_lang','لینک xpanel با پورت پنل');
+define('setting_multiserver_uname_lang','توکن');
 define('setting_multiserver_pass_lang','نام سرور');
+define('setting_multiserver_port_lang','پورت اتصال');
+define('setting_multiserver_port_tls_lang','پورت اتصال TLS');
+define('setting_multiserver_delete_lang','حذف به دلیل داشتن کاربر فعال ممکن نیست');
 define('setting_multiserver_iptb_lang','IP سرور');
 
 //settings sshport
@@ -193,3 +207,52 @@ define('setting_wordpress_install_lang','آغاز نصب وردپرس');
 
 //settings multiuser
 define('setting_multiuser_dec_lang','به دلیل ایجاد کندی در صفحه لود گزینه نمایش تعداد کاربران متصل در صفحه کاربران انتخابی می باشد');
+
+//detail user info
+define('detail_usernme_lang','نام کاربری');
+define('detail_password_lang','کلمه عبور');
+define('detail_sshport_lang','پورت SSH');
+define('detail_sshport_tls_lang','پورت SSH-TLS');
+define('detail_expdate_lang','تاریخ انقضا');
+define('detail_traffic_usage_lang','ترافیک مصرف شده');
+define('detail_traffic_lang','ترافیک');
+define('detail_exp_lang','منقضی شده');
+define('detail_exptraffic_lang','ترافیک تمام شده');
+define('detail_active_lang','فعال');
+define('detail_deactive_lang','غیرفعال');
+define('detail_change_server_lang','تغییر سرور');
+define('detail_success_lang','اعمال کن');
+define('detail_select_server_lang','انتخاب کنید');
+define('detail_servername_lang','نام سرور');
+define('detail_serverlink_lang','آدرس سرور');
+define('detail_editmanager_lang','ویرایش نماینده');
+
+//package
+define('package_name_lang','پکیج');
+define('package_editname_lang','ویرایش پکیج');
+define('package_title_lang','نام پکیج');
+define('package_amount_lang','قیمت');
+define('package_expday_lang','اعتبار روزانه');
+define('package_multiserver_lang','مولتی سرور');
+define('package_multion_lang','روشن');
+define('package_multioff_lang','خاموش');
+define('package_packageadd_lang','افزودن پکیج');
+define('package_server_lang','سرور پیش فرض');
+define('package_multiondesc_lang','با فعال سازی این گزینه کاربرانی که از این پکیج استفاده میکنند امکان تغییر سرور را خواهند داشت');
+define('package_chserver_lang','تغییر به');
+define('package_traffic_lang','ترافیک');
+define('package_traffic_gig_lang','ترافیک بر مبنای گیگ');
+define('package_multiuser_lang','اتصال همزمان');
+define('package_day_lang','روز');
+define('package_selecet_package_lang','پکیج مورد نظر را انتخاب کنید');
+
+//transaction
+define('transaction_name_lang','تراکنش ها');
+define('transaction_desc_lang','توضیحات');
+define('transaction_amount_lang','مبلغ');
+define('transaction_date_lang','تاریخ');
+define('transaction_add_lang','افزایش موجودی');
+define('transaction_remove_lang','کسر از موجودی');
+
+
+

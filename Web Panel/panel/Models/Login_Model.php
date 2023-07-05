@@ -10,6 +10,9 @@ class Login_Model extends Model
 	
 	public function submit_index($data_sybmit)
 	{
+        $query = $this->db->prepare("select * from setting ");
+        $query->execute();
+        $queryCount = $query->fetchAll();
 			$user = $data_sybmit['username'];
 			$pass = $data_sybmit['password'];
             $query = $this->db->prepare("select * from setting where adminuser='".$user."' and adminpassword='".$pass."'");
@@ -23,19 +26,19 @@ class Login_Model extends Model
                 $kay_login=$user.":XPlogin".time();
                 $sql = "UPDATE setting SET login_key=? WHERE adminuser=?";
                 $this->db->prepare($sql)->execute([$kay_login, $user]);
-                setcookie("xpkey", $kay_login, time()+86400);
+                setcookie("xcskey", $kay_login, time()+86400);
                 header("location: index");
 			}
 			elseif ($queryCount_ress > 0) {
                 $kay_login=$user.":XPlogin".time();
                 $sql = "UPDATE admins SET login_key=? WHERE username_u=?";
                 $this->db->prepare($sql)->execute([$kay_login, $user]);
-                setcookie("xpkey", $kay_login, time()+86400);
-                header("location: index");
+                setcookie("xcskey", $kay_login, time()+86400);
+                header("location: users");
 			}
             else
             {
-                header("location: login");
+                //header("location: login");
             }
 
 	}

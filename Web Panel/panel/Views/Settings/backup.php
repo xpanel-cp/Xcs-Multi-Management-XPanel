@@ -36,7 +36,7 @@
                         </thead>
                         <tbody>
                         <?php
-                        $output = shell_exec("ls /var/www/html/cp/storage/backup");
+                        $output = shell_exec("ls /var/www/html/panel/storage/backup");
                         $backuplist = preg_split("/\r\n|\n|\r/", $output);
                         foreach ($backuplist as $backup) {
                             if(!empty($backup))
@@ -47,7 +47,7 @@
                                     <td class="text-center">
                                         <ul class="list-inline me-auto mb-0">
                                             <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="<?php echo setting_backup_dl_lang;?>">
-                                                <a href="/storage/backup/<?php echo $backup;?>" class="avtar avtar-xs btn-link-danger btn-pc-default">
+                                                <a href="/panel/storage/backup/<?php echo $backup;?>" class="avtar avtar-xs btn-link-danger btn-pc-default">
                                                     <i class="ti ti-download f-18"></i>
                                                 </a>
                                             </li>

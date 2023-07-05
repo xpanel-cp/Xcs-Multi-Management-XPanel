@@ -56,6 +56,16 @@
                                     $finishdate = $datum['finishdate'];
                                 }
 
+                                if($datum['change_server']=='true')
+                                {
+                                    $server_check_true="checked=''";
+                                    $server_check_false="";
+                                }
+                                else{
+                                    $server_check_true="";
+                                    $server_check_false="checked=''";
+                                }
+
 
                                 ?>
                                 <form class="modal-content" action="" method="post" enctype="multipart/form-data" onsubmit="return confirm('<?php echo confirm_ac_lang;?>'');">
@@ -145,7 +155,20 @@
                                                                 <?php }?>
                                                             </div>
                                                             <small class="form-text text-muted"><?php echo edit_exdate_lang;?></small>
-
+                                                            <br>
+                                                            <div class="form-check form-check-inline">
+                                                                <input type="radio" class="form-check-input input-primary"
+                                                                       name="change_server" value="true" <?php echo $server_check_true;?>>
+                                                                <label class="form-check-label"
+                                                                       for="customCheckinl311"><?php echo detail_active_lang; ?></label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input type="radio" class="form-check-input input-primary"
+                                                                       name="change_server" value="false" <?php echo $server_check_false;?>>
+                                                                <label class="form-check-label"
+                                                                       for="customCheckinl32"><?php echo detail_deactive_lang; ?></label>
+                                                            </div>
+                                                            <small class="form-text text-muted"><?php echo user_change_server_mod_lang; ?></small>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -13,7 +13,9 @@ class Users extends Controller
     {
         $users=$this->model->users();
         $setting=$this->model->Get_settings();
-
+        $server_index=$this->model->index_server();
+        $server_package=$this->model->index_package();
+        $Get_permis=$this->model->Get_permis();
         //  echo "<pre>";
         // print_r($users);
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -21,7 +23,9 @@ class Users extends Controller
         $data = array(
             "for" => $users,
             "setting" => $setting,
-            "password" => $password
+            "password" => $password,
+            "server" => $server_index,
+            "package" => $server_package
         );
         if(isset($_GET['active'])) {
             if (!empty($_GET["active"])) {
@@ -43,7 +47,7 @@ class Users extends Controller
             }
         }
 
-        if(isset($_GET['delete']))
+        if(isset($_GET['delete']) and $Get_permis=='admin')
         {
             $usernme = htmlentities($_GET['delete']);
             $data_sybmit = array(
@@ -52,7 +56,7 @@ class Users extends Controller
             $this->model->delete_user($data_sybmit);
         }
 
-        if(isset($_GET['reset-traffic']))
+        if(isset($_GET['reset-traffic']) and $Get_permis=='admin')
         {
             $usernme = htmlentities($_GET['reset-traffic']);
             $data_sybmit = array(
@@ -62,14 +66,28 @@ class Users extends Controller
         }
 
         $this->submit_index();
-        $this->submit_index_bulk();
         $this->bulk_delete();
         $this->renewal_date();
+        $this->change_server();
         $this->view->Render("Users/index",$data);
     }
-    function bulk_delete(){
+    function change_server(){
+        $Get_permis=$this->model->Get_permis();
+        if (isset($_POST['change_server']) and $Get_permis=='admin') {
+            $username = htmlentities($_POST['username_re']);
+            $server = htmlentities($_POST['server']);
 
-        if (isset($_POST['delete'])) {
+            $data_sybmit = array(
+                'username' => $username,
+                'server' => $server
+            );
+            $this->model->change_server($data_sybmit);
+
+        }
+    }
+    function bulk_delete(){
+        $Get_permis=$this->model->Get_permis();
+        if (isset($_POST['delete']) and $Get_permis=='admin') {
             $checkbox = $_POST['usernamed'];
             foreach ($checkbox as $val) {
                 $data_sybmit = array(
@@ -81,16 +99,19 @@ class Users extends Controller
         }
     }
     function renewal_date(){
-
-        if (isset($_POST['renewal_date'])) {
+        $Get_permis=$this->model->Get_permis();
+        if (isset($_POST['renewal_date']) and $Get_permis=='admin') {
             $username_re = htmlentities($_POST['username_re']);
             $day_date = htmlentities($_POST['day_date']);
+
             $renewal_date = htmlentities($_POST['re_date']);
+            $renewal_traffic = htmlentities($_POST['re_traffic']);
 
             $data_sybmit = array(
                 'username' => $username_re,
                 'day_date' => $day_date,
-                'renewal_date' => $renewal_date
+                'renewal_date' => $renewal_date,
+                'renewal_traffic' => $renewal_traffic
             );
 
             //shell_exec("bash adduser " . $username . " " . $password);
@@ -99,8 +120,8 @@ class Users extends Controller
 
     }
     function submit_index(){
-
-        if (isset($_POST['submit']))
+        $Get_permis=$this->model->Get_permis();
+        if (isset($_POST['submit']) and $Get_permis=='admin')
         {
             $username = htmlentities($_POST['username']);
             $password = htmlentities($_POST['password']);
@@ -112,13 +133,9 @@ class Users extends Controller
             $type_traffic = htmlentities($_POST['type_traffic']);
             $expdate = htmlentities($_POST['expdate']);
             $desc = htmlentities($_POST['desc']);
-            if(!empty($connection_start)) { $st_date=''; }
-            else { $st_date=date("Y-m-d"); }
-            if ($type_traffic == "gb") {
-                $traffic = $traffic * 1024;
-            } else {
-                $traffic = $traffic;
-            }
+            $server = htmlentities($_POST['server']);
+            $change_server = htmlentities($_POST['change_server']);
+            $st_date=date("Y-m-d");
             $data_sybmit = array(
                 'username' =>$username,
                 'password' => $password,
@@ -130,75 +147,28 @@ class Users extends Controller
                 'finishdate_one_connect' => $connection_start,
                 'enable' => 'true',
                 'traffic' => $traffic,
+                'type_traffic' => $type_traffic,
                 'referral' => '',
-                'info' => $desc
+                'info' => $desc,
+                'id_server' => $server,
+                'change_server' => $change_server
             );
-            //shell_exec("bash adduser " . $username . " " . $password);
             $this->model->submit_index($data_sybmit);
-            //header('location: users');
-
-
         }
 
-    }
-
-    //bulk user
-    function submit_index_bulk(){
-
-
-        if (isset($_POST['bulk']))
+        if (isset($_POST['submit']) and $Get_permis!='admin')
         {
-            $count_user = htmlentities($_POST['count_user']);
-            $start_user = htmlentities($_POST['start_user']);
-            $start_number = htmlentities($_POST['start_number']);
-
-            $password = htmlentities($_POST['password']);
-            $pass_random = htmlentities($_POST['pass_random']);
-            $char_pass = htmlentities($_POST['char_pass']);
-
-            $multiuser = htmlentities($_POST['multiuser']);
-            $connection_start = htmlentities($_POST['connection_start']);
-            $traffic = htmlentities($_POST['traffic']);
-            $type_traffic = htmlentities($_POST['type_traffic']);
-            if ($type_traffic == "gb") {
-                $traffic = $traffic * 1024;
-            } else {
-                $traffic = $traffic;
-            }
-            for ($i = 0; $i < $count_user; $i++) {
-                if ($start_number < $start_number + $count_user) {
-                    $list_users[] = $start_user . $start_number;
-                    $start_number++;
-                }
-            }
-
-            foreach ($list_users as $user) {
-                $data_sybmit = array(
-                    'username' => $user,
-                    'password' => $password,
-                    'email' => 'کاربر عمده',
-                    'mobile' => '',
-                    'multiuser' => $multiuser,
-                    'startdate' => '',
-                    'finishdate' => '',
-                    'finishdate_one_connect' => $connection_start,
-                    'enable' => 'true',
-                    'traffic' => $traffic,
-                    'referral' => '',
-                    'info' => 'کاربرعمده',
-                    'pass_rand' => $pass_random,
-                    'pass_char' => $char_pass
-                );
-                //shell_exec("bash adduser " . $username . " " . $password);
-                $this->model->submit_index($data_sybmit);
-                //header('location: users');
-
-            }
-
-
+            $email = htmlentities($_POST['email']);
+            $mobile = htmlentities($_POST['mobile']);
+            $pack = htmlentities($_POST['pack']);
+            $data_sybmit = array(
+                'email' => $email,
+                'mobile' => $mobile,
+                'pack' => $pack
+            );
+            $this->model->submit_index_reseller($data_sybmit);
         }
 
     }
-
 
 }

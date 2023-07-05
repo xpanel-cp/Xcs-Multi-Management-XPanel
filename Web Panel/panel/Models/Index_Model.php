@@ -6,14 +6,14 @@ class Index_Model extends Model
     {
         // Call the Model constructor
         parent::__construct();
-        if (isset($_COOKIE["xpkey"])) {
-            $key_login = explode(':', $_COOKIE["xpkey"]);
+        if (isset($_COOKIE["xcskey"])) {
+            $key_login = explode(':', $_COOKIE["xcskey"]);
             $Ukey=$key_login[0];
             $Pkey=$key_login[1];
-            $query = $this->db->prepare("select * from setting where adminuser='" .$Ukey. "' and login_key='" .$_COOKIE["xpkey"]. "'");
+            $query = $this->db->prepare("select * from setting where adminuser='" .$Ukey. "' and login_key='" .$_COOKIE["xcskey"]. "'");
             $query->execute();
             $queryCount = $query->rowCount();
-            $query_ress = $this->db->prepare("select * from admins where username_u='" . $Ukey . "' and login_key='" . $_COOKIE["xpkey"] . "'");
+            $query_ress = $this->db->prepare("select * from admins where username_u='" . $Ukey . "' and login_key='" . $_COOKIE["xcskey"] . "'");
             $query_ress->execute();
             $queryCount_ress = $query_ress->rowCount();
             if ($queryCount >0) {
@@ -32,8 +32,8 @@ class Index_Model extends Model
     //we will use the select function
     public function all_user()
     {
-        if (isset($_COOKIE["xpkey"])) {
-            $key_login = explode(':', $_COOKIE["xpkey"]);
+        if (isset($_COOKIE["xcskey"])) {
+            $key_login = explode(':', $_COOKIE["xcskey"]);
             $Ukey = $key_login[0];
         }
         if(permis=='admin'){$where='';} else{$where=" where customer_user='$Ukey' ";}
@@ -53,8 +53,8 @@ class Index_Model extends Model
     }
     public function active_user()
     {
-        if (isset($_COOKIE["xpkey"])) {
-            $key_login = explode(':', $_COOKIE["xpkey"]);
+        if (isset($_COOKIE["xcskey"])) {
+            $key_login = explode(':', $_COOKIE["xcskey"]);
             $Ukey = $key_login[0];
         }
         if(permis=='admin'){$where='';} else{$where=" and customer_user='$Ukey' ";}
@@ -65,8 +65,8 @@ class Index_Model extends Model
     }
     public function deactive_user()
     {
-        if (isset($_COOKIE["xpkey"])) {
-            $key_login = explode(':', $_COOKIE["xpkey"]);
+        if (isset($_COOKIE["xcskey"])) {
+            $key_login = explode(':', $_COOKIE["xcskey"]);
             $Ukey = $key_login[0];
         }
         if(permis=='admin'){$where='';} else{$where=" and customer_user='$Ukey' ";}
@@ -78,8 +78,8 @@ class Index_Model extends Model
 
     public function user_band()
     {
-        if (isset($_COOKIE["xpkey"])) {
-            $key_login = explode(':', $_COOKIE["xpkey"]);
+        if (isset($_COOKIE["xcskey"])) {
+            $key_login = explode(':', $_COOKIE["xcskey"]);
             $Ukey = $key_login[0];
         }
         if(permis=='admin'){$where='';} else{$where=" and users.customer_user='$Ukey' ";}

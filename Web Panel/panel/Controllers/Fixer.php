@@ -18,10 +18,6 @@ class Fixer extends Controller
             if (!empty($_GET["jub"]) and $_GET["jub"] == 'synstraffic') {
                 $this->model->synstraffic();
             }
-
-            if (!empty($_GET["jub"]) and $_GET["jub"] == 'multi') {
-                $this->model->multiuser();
-            }
         }
 
     }

@@ -6,14 +6,6 @@
                 <small class="form-text text-muted"><?php echo setting_api_desc_lang;?></small>
             </div>
         </div>
-
-        <div class="form-group row">
-            <div class="col-lg-6">
-                <input class="form-control" type="text" name="allowip" required="" value="0.0.0.0/0">
-                <small class="form-text text-muted"><?php echo setting_api_ip_lang;?></small>
-            </div>
-        </div>
-
         <div class="form-group row">
             <div class="col-lg-4 col-form-label"></div>
             <div class="col-lg-6">
@@ -31,7 +23,7 @@
                         <tr>
                             <th>#</th>
                             <th><?php echo setting_api_token_lang;?></th>
-                            <th><?php echo setting_api_ip_lang;?></th>
+                            <th><?php echo setting_api_desc_lang;?></th>
                             <th class="text-center"><?php echo setting_api_renew_token_lang;?></th>
                             <th class="text-center"><?php echo delete_u_act_tb_lang;?></th>
                         </tr>
@@ -39,13 +31,12 @@
                         <?php  foreach($data['api'] as $val){
                             $Token=$val['Token'];
                             $Description=$val['Description'];
-                            $Allowips=$val['Allowips'];
                             $enable=$val['enable'];
                             ?>
                             <tr>
                                 <td>#</td>
                                 <td><?php echo $Token;?></td>
-                                <td><?php echo $Allowips;?><br><small><?php echo $Description;?></small></td>
+                                <td><?php echo $Description;?></td>
                                 <td class="text-center">
                                     <a href="Settings&sort=api&renew=<?php echo $Token;?>" class="avtar avtar-xs btn-link-success btn-pc-default">
                                         <i class="ti ti-refresh f-18"></i>

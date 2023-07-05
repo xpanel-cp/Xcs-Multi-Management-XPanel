@@ -10,10 +10,12 @@ class Settings extends Controller
         $this->model = new Settings_Model();
         $settings=$this->model->Get_settings();
         $api_index=$this->model->index_api();
+        $server_index=$this->model->index_server();
         //echo "<br>Page Index ";
         $data = array(
             "for" => $settings,
-            "api" => $api_index
+            "api" => $api_index,
+            "server" => $server_index
         );
         if(isset($_GET['pos']))
         {
@@ -58,24 +60,29 @@ class Settings extends Controller
             );
             $this->model->submit_pass($data_sybmit);
         }
-
-        if (isset($_POST['changeport'])) {
-            $ssh_port = htmlentities($_POST['ssh_port']);
-            $ssh_port_old = htmlentities($_POST['ssh_port_old']);
-            $sshtlsport = htmlentities($_POST['sshtlsport']);
+        if (isset($_POST['addserver'])) {
+            $link = htmlentities($_POST['link']);
+            $token = htmlentities($_POST['token']);
+            $name = htmlentities($_POST['name']);
+            $port = htmlentities($_POST['port']);
+            $port_tls = htmlentities($_POST['port_tls']);
             $data_sybmit = array(
-                'sshport' => $ssh_port,
-                'sshport_old' => $ssh_port_old,
-                'sshtlsport' => $sshtlsport
+                'link' => $link,
+                'token' => $token,
+                'name' => $name,
+                'port' => $port,
+                'port_tls' => $port_tls
             );
-            $this->model->submit_port($data_sybmit);
+            $this->model->submit_server($data_sybmit);
+        }
+        if (isset($_GET['sort']) and $_GET['sort']=='multiserver' and !empty($_GET['delete'])) {
+            $id = htmlentities($_GET['delete']);
+            $this->model->delete_server($id);
         }
         if (isset($_POST['addapi'])) {
             $desc = htmlentities($_POST['desc']);
-            $allowip = htmlentities($_POST['allowip']);
             $data_sybmit = array(
-                'desc' => $desc,
-                'allowip' => $allowip
+                'desc' => $desc
             );
             $this->model->submit_api($data_sybmit);
         }
@@ -88,43 +95,9 @@ class Settings extends Controller
             $renew = htmlentities($_GET['renew']);
             $this->model->renew_api($renew);
         }
-
-        if (isset($_POST['fakeurl'])) {
-            $fake_address = htmlentities($_POST['fake_address']);
-            $fake_address_old = htmlentities($_POST['fake_address_old']);
-            $data_sybmit = array(
-                'fake_address' => $fake_address,
-                'fake_address_old' => $fake_address_old
-            );
-            $this->model->submit_fakeurl($data_sybmit);
-        }
-
-        if (isset($_POST['on_limit_user'])) {
-            $this->model->submit_multiuser_on_limit($data_sybmit);
-        }
-        if (isset($_POST['off_limit_user'])) {
-            $this->model->submit_multiuser_off_limit($data_sybmit);
-        }
-
-        if (isset($_POST['on_status_user'])) {
-            $this->model->submit_status_multiuser_on($data_sybmit);
-        }
-        if (isset($_POST['off_status_user'])) {
-            $this->model->submit_status_multiuser_off($data_sybmit);
-        }
-        if (isset($_POST['submitbot'])) {
-
-            $tokenbot = htmlentities($_POST['tokenbot']);
-            $idtelegram = htmlentities($_POST['idtelegram']);
-            $data_sybmit = array(
-                'tokenbot' => $tokenbot,
-                'idtelegram' => $idtelegram
-            );
-            $this->model->submit_bot($data_sybmit);
-        }
         if (isset($_POST['savebackup'])) {
             $date = date("Y-m-d---h-i-s");
-            shell_exec("mysqldump -u '".DB_USER."' --password='".DB_PASS."' XPanel > /var/www/html/cp/storage/backup/XPanel-".$date.".sql");
+            shell_exec("mysqldump -u '".DB_USER."' --password='".DB_PASS."' Xcs > /var/www/html/panel/storage/backup/Xcs-".$date.".sql");
         }
 
         if (isset($_POST['upbackup'])) {
@@ -170,15 +143,6 @@ class Settings extends Controller
                 'name' => $run_backup
             );
             $this->model->submit_restor_backup($data_sybmit);
-        }
-
-        if (isset($_POST['active_blockip'])) {
-            shell_exec("sudo iptables -A OUTPUT -m geoip -p tcp --destination-port 80 --dst-cc IR -j DROP");
-            shell_exec("sudo iptables -A OUTPUT -m geoip -p tcp --destination-port 443 --dst-cc IR -j DROP");
-        }
-
-        if (isset($_POST['deactive_blockip'])) {
-            shell_exec("sudo iptables -F");
         }
 
 

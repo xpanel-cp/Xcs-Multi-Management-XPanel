@@ -56,10 +56,12 @@ class Managers extends Controller
         {
             $username = htmlentities($_POST['username']);
             $password = htmlentities($_POST['password']);
+            $credit = htmlentities($_POST['credit']);
 
             $data_sybmit = array(
                 'username' =>$username,
-                'password' => $password
+                'password' => $password,
+                'credit' => $credit
             );
             //shell_exec("bash adduser " . $username . " " . $password);
             $this->model->submit_index($data_sybmit);

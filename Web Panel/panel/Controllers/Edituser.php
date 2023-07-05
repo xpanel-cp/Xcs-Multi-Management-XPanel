@@ -32,6 +32,7 @@ class Edituser extends Controller
                     $expdate = htmlentities($_POST['expdate']);
                     $desc = htmlentities($_POST['desc']);
                     $activate = htmlentities($_POST['activate']);
+                    $change_server = htmlentities($_POST['change_server']);
                     if ($type_traffic == "gb") {
                         $traffic = $traffic * 1024;
                     } else {
@@ -46,7 +47,8 @@ class Edituser extends Controller
                         'finishdate' => $expdate,
                         'traffic' => $traffic,
                         'info' => $desc,
-                        'activate' => $activate
+                        'activate' => $activate,
+                        'change_server' => $change_server
                     );
                     $this->model->submit_update($data_sybmit);
                 }

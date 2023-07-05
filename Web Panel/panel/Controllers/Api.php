@@ -22,120 +22,122 @@ class Api extends Controller
     {
         //list user
         if(isset($_GET['method']) && $_GET['method'] == "listuser"){
-            $list_user = $this->model->list_user();
-            $this->response($list_user) ;
+            $list_users = $this->model->list_user();
+            foreach ($list_users as $list_user) {
+
+                $total = $list_user['total'] . ' GB';
+                $server = $_SERVER["SERVER_NAME"];
+                if (empty($list_user['port_connection_tls']) || $list_user['port_connection_tls'] == 'NULL') {
+                    $ssh_tls_port = '444';
+                } else {
+                    $ssh_tls_port = $list_user['port_connection_tls'];
+                }
+                $data [] = array(
+                    'id' => $list_user['id'],
+                    'server_name' => $list_user['name'],
+                    'server' => $server,
+                    'username' => $list_user['username'],
+                    'password' => $list_user['password'],
+                    'ssh_port' => $list_user['port_connection'],
+                    'ssh_tls_port' => $ssh_tls_port,
+                    'email' => $list_user['email'],
+                    'mobile' => $list_user['mobile'],
+                    'multiuser' => $list_user['multiuser'],
+                    'startdate' => $list_user['startdate'],
+                    'finishdate' => $list_user['finishdate'],
+                    'finishdate_one_connect' => $list_user['connection_start'],
+                    'customer_user' => $list_user['customer_user'],
+                    'enable' => $list_user['enable'],
+                    'traffic' => $list_user['traffic'],
+                    'referral' => $list_user['referral'],
+                    'info' => $list_user['info'],
+                    'traffic_usage' => $total,
+                    'qr_ssh' => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=ssh://" . $list_user['username'] . ":" . $list_user['password'] . "@" . $server . ":" . $list_user['port_connection'] . "/#" . $list_user['username'],
+                    'qr_ssh_tls' => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=ssh://" . $list_user['username'] . ":" . $list_user['password'] . "@" . $server . ":" . $ssh_tls_port . "/#" . $list_user['username']
+                );
+            }
+            $this->response($data) ;
         }
 
         //sort status user
         if(isset($_GET['method']) && $_GET['method'] == "users" && !empty($_GET['status'])){
             $status_user = $this->model->status_user($_GET['status']);
-            $this->response($status_user) ;
-        }
+            foreach ($status_user as $list_user) {
 
-        //add user
-        if(isset($_GET['method']) && $_GET['method'] == "adduser"){
-            $username = htmlentities($_POST['username']);
-            $password = htmlentities($_POST['password']);
-            $email = htmlentities($_POST['email']);
-            $mobile = htmlentities($_POST['mobile']);
-            $multiuser = htmlentities("1") ;
-            if(isset($_POST['multiuser'])){
-                $multiuser = htmlentities($_POST['multiuser']);
-            }
-            $connection_start = htmlentities($_POST['connection_start']);
-            $traffic = htmlentities('0');
-            if(isset($_POST['traffic'])){
-                $traffic = htmlentities($_POST['traffic']);
-            }
-            $type_traffic = htmlentities($_POST['type_traffic']);
-            $expdate = htmlentities($_POST['expdate']);
-            $desc = htmlentities($_POST['desc']);
-            if(!empty($connection_start)) { $st_date=''; }
-            else { $st_date=date("Y-m-d"); }
-            if ($type_traffic == "gb") {
-                $traffic = $traffic * 1024;
-            } else {
-                $traffic = $traffic;
-            }
-            if(!empty($username) and !empty($password)) {
-                $data_sybmit = array(
-                    'username' => $username,
-                    'password' => $password,
-                    'email' => $email,
-                    'mobile' => $mobile,
-                    'multiuser' => $multiuser,
-                    'startdate' => $st_date,
-                    'finishdate' => $expdate,
-                    'finishdate_one_connect' => $connection_start,
-                    'enable' => 'true',
-                    'traffic' => $traffic,
-                    'referral' => '',
-                    'info' => $desc
+                $total = $list_user['total'] . ' GB';
+                $server = $_SERVER["SERVER_NAME"];
+                if (empty($list_user['port_connection_tls']) || $list_user['port_connection_tls'] == 'NULL') {
+                    $ssh_tls_port = '444';
+                } else {
+                    $ssh_tls_port = $list_user['port_connection_tls'];
+                }
+                $data [] = array(
+                    'id' => $list_user['id'],
+                    'server_name' => $list_user['name'],
+                    'server' => $server,
+                    'username' => $list_user['username'],
+                    'password' => $list_user['password'],
+                    'ssh_port' => $list_user['port_connection'],
+                    'ssh_tls_port' => $ssh_tls_port,
+                    'email' => $list_user['email'],
+                    'mobile' => $list_user['mobile'],
+                    'multiuser' => $list_user['multiuser'],
+                    'startdate' => $list_user['startdate'],
+                    'finishdate' => $list_user['finishdate'],
+                    'finishdate_one_connect' => $list_user['connection_start'],
+                    'customer_user' => $list_user['customer_user'],
+                    'enable' => $list_user['enable'],
+                    'traffic' => $list_user['traffic'],
+                    'referral' => $list_user['referral'],
+                    'info' => $list_user['info'],
+                    'traffic_usage' => $total,
+                    'qr_ssh' => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=ssh://" . $list_user['username'] . ":" . $list_user['password'] . "@" . $server . ":" . $list_user['port_connection'] . "/#" . $list_user['username'],
+                    'qr_ssh_tls' => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=ssh://" . $list_user['username'] . ":" . $list_user['password'] . "@" . $server . ":" . $ssh_tls_port . "/#" . $list_user['username']
                 );
-                $this->model->submit_index($data_sybmit);
-            }
-            else
-            {
-                echo "invalid empty username and password";
             }
 
+            $this->response($data) ;
         }
 
         //show user
         if(isset($_GET['method']) && $_GET['method'] == "user" && !empty($_GET['username'])){
             $usernme = htmlentities($_GET['username']);
             $show_user = $this->model->show_user($usernme);
-            $this->response($show_user) ;
-        }
-        //edit user
-        if(isset($_GET['method']) && $_GET['method'] == "edituser"){
-            $username = htmlentities($_POST['username']);
-            $password = htmlentities($_POST['password']);
-            $email = htmlentities($_POST['email']);
-            $mobile = htmlentities($_POST['mobile']);
-            $multiuser = htmlentities($_POST['multiuser']);
-            $traffic = htmlentities($_POST['traffic']);
-            $type_traffic = htmlentities($_POST['type_traffic']);
-            $expdate = htmlentities($_POST['expdate']);
-            $desc = htmlentities($_POST['desc']);
-            if ($type_traffic == "gb") {
-                $traffic = $traffic * 1024;
-            } else {
-                $traffic = $traffic;
-            }
-            if(!empty($username) && !empty($password)) {
-                $data_sybmit = array(
-                    'username' => $username,
-                    'password' => $password,
-                    'email' => $email,
-                    'mobile' => $mobile,
-                    'multiuser' => $multiuser,
-                    'finishdate' => $expdate,
-                    'traffic' => $traffic,
-                    'info' => $desc
+            $list_user=$show_user[0];
+
+                $total = $list_user['total'] . ' GB';
+                $server = $_SERVER["SERVER_NAME"];
+                if (empty($list_user['port_connection_tls']) || $list_user['port_connection_tls'] == 'NULL') {
+                    $ssh_tls_port = '444';
+                } else {
+                    $ssh_tls_port = $list_user['port_connection_tls'];
+                }
+                $data [] = array(
+                    'id' => $list_user['id'],
+                    'server_name' => $list_user['name'],
+                    'server' => $server,
+                    'username' => $list_user['username'],
+                    'password' => $list_user['password'],
+                    'ssh_port' => $list_user['port_connection'],
+                    'ssh_tls_port' => $ssh_tls_port,
+                    'email' => $list_user['email'],
+                    'mobile' => $list_user['mobile'],
+                    'multiuser' => $list_user['multiuser'],
+                    'startdate' => $list_user['startdate'],
+                    'finishdate' => $list_user['finishdate'],
+                    'finishdate_one_connect' => $list_user['connection_start'],
+                    'customer_user' => $list_user['customer_user'],
+                    'enable' => $list_user['enable'],
+                    'traffic' => $list_user['traffic'],
+                    'referral' => $list_user['referral'],
+                    'info' => $list_user['info'],
+                    'traffic_usage' => $total,
+                    'qr_ssh' => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=ssh://" . $list_user['username'] . ":" . $list_user['password'] . "@" . $server . ":" . $list_user['port_connection'] . "/#" . $list_user['username'],
+                    'qr_ssh_tls' => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=ssh://" . $list_user['username'] . ":" . $list_user['password'] . "@" . $server . ":" . $ssh_tls_port . "/#" . $list_user['username']
                 );
-                $edit_user = $this->model->edit_user($data_sybmit);
-                $this->response($edit_user);
-            }
-            else
-            {
-                echo "invalid empty username and password";
-            }
+            $this->response($data) ;
         }
-        // delete user
-        if(isset($_GET['method']) && $_GET['method'] == "deleteuser"){
-            $usernme = htmlentities($_POST['username']);
-            if(!empty($usernme)) {
-                $data_sybmit = array(
-                    'username' => $usernme
-                );
-                $this->model->delete_user($data_sybmit);
-            }
-            else
-            {
-                echo "invalid empty username";
-            }
-        }
+
 
 
     }

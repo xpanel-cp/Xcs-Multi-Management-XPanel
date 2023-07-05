@@ -18,18 +18,28 @@
 
 		<!-- [ Main Content ] start -->
 		<div class="row">
-          
-			<div class="col-12">
-				<div class="card">
 
+                                    <?php
+                                    foreach ($data['server'] as $val){
+                                    $id = $val['id'];
+                                    $link = $val['link'];
+                                    $token = $val['token'];
+                                    $name = $val['name'];
+                                    $port = $val['port_connection'];
+                                    $port_tls = $val['port_connection_tls'];
+                                    $link=explode(':',$link);
+                                    $link=$link[0].':'.$link[1];
+echo '
+<div class="col-12">
+				<div class="card">
 					<div class="card-body">
+					<span style="background: #4a9afe; padding: 3px; color: #fff; border-radius: 5px;">Server: '.$link.' </span>
 						<div class="row">
 							<div class="col-lg-12 col-xl-12">
-								<ul class="list-group list-group-flush">
-                                    <?php
+								<ul class="list-group list-group-flush">';
                                     $serverip = $_SERVER["SERVER_ADDR"];
                                     $ch = curl_init();
-                                    curl_setopt($ch, CURLOPT_URL, "https://check-host.net/check-tcp?host=" . $serverip.":".PORT."&max_nodes=50");
+                                    curl_setopt($ch, CURLOPT_URL, "https://check-host.net/check-tcp?host=" . $link.":".$port."&max_nodes=50");
                                     curl_setopt($ch, CURLOPT_POST, 1);
                                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                                     $headers = ["Accept: application/json", "Cache-Control: no-cache"];
@@ -54,9 +64,9 @@
                                     if ($flag == "ir" || $flag == "us" || $flag == "fr" || $flag == "de") {
                                     $img = "<img src='assets/images/flags/" . $flag . ".png' >";
                                     if (is_numeric($value[0]["time"])) {
-                                        $status = "Online";
+                                        $status = '<i style="color:#269393 !important;" class="ti ti-target"></i>';
                                     } else {
-                                        $status = "فیلتر شده";
+                                        $status = '<i style="color:#dc2626 !important;" class="ti ti-target"></i>';
                                     }
                                     ?>
 									<li class="list-group-item">
@@ -81,14 +91,16 @@
                                     <?php
                                     }
                                     }
-
-                                    ?>
-                                </ul>
-							</div>
+                                    echo'
+                                    </div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>';
+                                    }
+                                    ?>
+                                </ul>
+
 		</div>
 		<!-- [ Main Content ] end -->
 	</div>

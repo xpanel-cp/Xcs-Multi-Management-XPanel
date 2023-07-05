@@ -16,7 +16,7 @@ define('dashboard_lang','Dashboard');
 define('users_lang','Users');
 define('online_users_lang','Online Users');
 define('filtering_status_lang','Filtering Status');
-define('managers_lang','Managers');
+define('managers_lang','Agent');
 define('settings_lang','Settings');
 define('logut_lang','Logout');
 define('admin_lang','Admin');
@@ -41,12 +41,13 @@ define('new_user_lang','New User');
 define('multi_user_new_lang','Bulk User');
 define('multi_user_bulk_delete_lang','Delete');
 define('multi_user_renewal_lang','Renewal');
-define('multi_user_renewal_desc_lang','The registration date should be registered from today');
+define('user_server_lang','Change server');
+define('renewal_date_desc_lang','Registered from today');
+define('renewal_traffic_desc_lang','Reset the traffic');
 define('multi_user_renewal_yes_lang','Yes');
 define('multi_user_renewal_no_lang','No');
 define('customer_tb_lang','Agent');
 define('server_tb_lang','Server');
-define('select_lang','Select');
 define('username_tb_lang','Username');
 define('password_tb_lang','Password');
 define('traffic_tb_lang','Traffic');
@@ -72,7 +73,7 @@ define('reset_u_act_tb_lang','Reset Traffic');
 define('delete_u_act_tb_lang','Delete');
 define('edit_tooltip_tb_lang','Edit');
 define('share_tooltip_tb_lang','Share');
-define('share_copyconfig_tb_lang','Copy Detail');
+define('share_copyconfig_tb_lang','User exclusive link');
 define('share_copynetmod_tb_lang','Netmod');
 define('share_copynv_tb_lang','NV');
 define('modal_username_lang','Username');
@@ -85,7 +86,7 @@ define('modal_phone_lang','Phone Number');
 define('modal_phone_lable_lang','Enter phone number');
 define('modal_multiuser_lang','Concurrent Users');
 define('modal_multiuser_lable_lang','Enter number of concurrent users');
-define('modal_expdate_lang','Expiration Date (on first connection)');
+define('modal_expdate_lang','The number of days the account is valid');
 define('modal_expdate_lable_lang','If you want to set the expiration date on the first connection, enter the number of validity days in the field above');
 define('modal_traffic_lable_lang','Enter traffic');
 define('modal_expdate2_lang','Expiration Date');
@@ -108,14 +109,26 @@ define('modal_b_char_pass_lable_lang','Enter the number of characters of the pas
 define('modal_b_multi_user_lang','Simultaneous user');
 define('modal_b_multi_user_lable_lang','Enter the number of simultaneous users');
 define('modal_b_alert_lang','Note that if the user is already registered, the system will not allow the registration');
+define('select_lang','Choose');
+define('modal_server_lable_lang','Choose a default server to create an account');
+define('modal_chserver_lable_lang','To change the subscription server, the user must choose a server');
+define('modal_credit_admin_lang','Agency credit');
+define('modal_credit_admin_wallet_lang','Lack of wallet balance');
+
 
 //edit user
 define('edit_user_lang','Edit user');
 define('edit_exdate_lang','Expiration date');
 define('edit_submit_lang','Save');
 
+//change server
+define('user_change_server_error_lang','The user is on the same server. Please choose another server');
+define('user_change_server_rep_lang','The username exists on the selected server');
+define('user_change_server_mod_lang','Changing the server from the user side');
+
+
 //manager
-define('manager_newuser_lang','New manager');
+define('manager_newuser_lang','New agent');
 
 //settings
 define('setting_pass_title_lang','Change password');
@@ -159,9 +172,12 @@ define('setting_fakeadd_web_lang','Website address');
 
 //multiserver settings
 define('setting_multiserver_alert_lang','This section is unavailable until the correct connection method is prepared and the servers are analyzed');
-define('setting_multiserver_ip_lang','Enter XPanel link with port (http://domain:port)');
-define('setting_multiserver_uname_lang','Enter the API token');
+define('setting_multiserver_ip_lang','XPanel link with panel port');
+define('setting_multiserver_uname_lang','Token');
 define('setting_multiserver_pass_lang','Server name');
+define('setting_multiserver_port_lang','Connection port');
+define('setting_multiserver_port_tls_lang','TLS connection port');
+define('setting_multiserver_delete_lang','Deleting is not possible because there is an active user');
 define('setting_multiserver_iptb_lang','Server IP');
 
 //settings sshport
@@ -194,3 +210,49 @@ define('setting_wordpress_install_lang','Start installing WordPress');
 
 //multiuser settings
 define('setting_multiuser_dec_lang','Due to slowness in the loading page, the option to display the number of connected users on the users page is selected');
+
+//detail user info
+define('detail_usernme_lang','Username');
+define('detail_password_lang','Password');
+define('detail_sshport_lang','SSH port');
+define('detail_sshport_tls_lang','SSH-TLS port');
+define('detail_expdate_lang','Expiration date');
+define('detail_traffic_usage_lang','Traffic used');
+define('detail_traffic_lang','Traffic');
+define('detail_exp_lang','Expired');
+define('detail_exptraffic_lang','Expired traffic');
+define('detail_active_lang','Active');
+define('detail_deactive_lang','Deactive');
+define('detail_change_server_lang','Change server');
+define('detail_success_lang','Apply');
+define('detail_select_server_lang','Select');
+define('detail_servername_lang','Server name');
+define('detail_serverlink_lang','Server address');
+define('detail_editmanager_lang','Edit Agent');
+
+// package
+define('package_name_lang','Package');
+define('package_editname_lang','Edit package');
+define('package_title_lang','Package name');
+define('package_amount_lang','Price');
+define('package_expday_lang','Daily credit');
+define('package_multiserver_lang','Multiserver');
+define('package_multion_lang','On');
+define('package_multioff_lang','Off');
+define('package_packageadd_lang','Add package');
+define('package_server_lang','Default server');
+define('package_multiondesc_lang','By activating this option, users who use this package will be able to change the server');
+define('package_chserver_lang','Change to');
+define('package_traffic_lang','Traffic');
+define('package_traffic_gig_lang','Traffic based on gig');
+define('package_multiuser_lang','Multi user');
+define('package_day_lang','Day');
+define('package_selecet_package_lang','Select the desired package');
+
+//transaction
+define('transaction_name_lang','Transactions');
+define('transaction_desc_lang','Description');
+define('transaction_amount_lang','Amount');
+define('transaction_date_lang','Date');
+define('transaction_add_lang','Increase inventory');
+define('transaction_remove_lang','Deduction from balance');

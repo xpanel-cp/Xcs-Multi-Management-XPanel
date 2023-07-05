@@ -35,6 +35,7 @@
                                     <th>#ID</th>
                                     <th><?php echo username_tb_lang;?></th>
                                     <th><?php echo password_tb_lang;?></th>
+                                    <th><?php echo modal_credit_admin_lang;?></th>
                                     <th><?php echo status_tb_lang;?></th>
                                     <th class="text-center"><?php echo action_tb_lang;?></th>
                                 </tr>
@@ -57,6 +58,7 @@
                                         <td><?php echo $uid; ?></td>
                                         <td><?php echo $datum['username_u']; ?></td>
                                         <td><?php echo $datum['password_u']; ?></td>
+                                        <td><?php echo number_format($datum["credit_u"]); ?></td>
 
                                         <td><?php echo $status; ?></td>
 
@@ -70,7 +72,12 @@
                                                             <a class="dropdown-item" href="managers&delete=<?php echo $datum['username_u']; ?>"><?php echo delete_u_act_tb_lang;?></a>
                                                         </div>
                                                 </li>
-                                                
+                                                <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
+                                                    title="<?php echo edit_tooltip_tb_lang; ?>">
+                                                    <a href="editmanager&username=<?php echo $datum['username_u']; ?>"  class="re_user avtar avtar-xs btn-link-success btn-pc-default">
+                                                        <i class="ti ti-edit f-18"></i>
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -100,7 +107,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <input type="text" name="username" class="form-control"
@@ -109,7 +116,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="input-group">
@@ -118,6 +125,18 @@
                                                    placeholder="<?php echo modal_pass_lang;?>" required>
                                         </div>
                                         <small class="form-text text-muted"><?php echo modal_pass_lable_lang;?></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="input-group">
+                                            <input type="text" name="credit" class="form-control"
+                                                   placeholder="10000" required>
+                                        </div>
+                                        <small class="form-text text-muted"><?php echo modal_credit_admin_lang;?></small>
                                     </div>
                                 </div>
                             </div>
