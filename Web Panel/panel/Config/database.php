@@ -1,6 +1,6 @@
 <?php
-$username = "admin";
-$password = "123456";
+$username = "adminuser";
+$password = "adminpass";
 $dbname = "Xcs";
 $lang = "fa-ir";
 
