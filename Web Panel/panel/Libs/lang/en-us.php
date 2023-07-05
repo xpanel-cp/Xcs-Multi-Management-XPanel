@@ -35,6 +35,12 @@ define('high_consumption_lang','High Consumption Users');
 define('expiration_lang','Expiration Date');
 define('gib_lang','GB');
 define('mib_lang','MB');
+define('dashboard_desc1_lang','Hello, dear user. This web application, called XPanel, has been developed for practical user management purposes.');
+define('dashboard_desc2_lang','All features of XPanel are freely available to the public, so that all members of society who have the capability and desire to set up and use it can benefit from it.');
+define('dashboard_desc3_lang','Xcs, similar to XPanel, has also been released completely free of charge to address the users needs.');
+define('dashboard_desc4_lang','Under no circumstances should any of these web applications be charged for, and any individuals claiming payment for the panel are not endorsed by us and have abused the terms. The developer of the panel bears no responsibility for such misuse.');
+define('dashboard_desc5_lang','Dear users who have non-personal commercial usage, you can support the developer by making donations through the following methods. All donations will be allocated to social and charitable causes. If you have commercial usage, it is requested that you donate only 1% of your monthly income each month, so that together we can address some of the issues faced by the underprivileged.');
+
 
 //users
 define('new_user_lang','New User');

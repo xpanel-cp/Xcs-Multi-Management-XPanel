@@ -1,23 +1,4 @@
 <!-- [ Main Content ] start -->
-<?php
-$json = file_get_contents('https://raw.githubusercontent.com/Alirezad07/X-Panel-SSH-User-Management/main/version.json');
-$obj = json_decode($json);
-if(LANG=='fa-ir'){$github='https://github.com/Alirezad07/X-Panel-SSH-User-Management#%D9%86%D8%B5%D8%A8';}
-else {$github='https://github.com/Alirezad07/X-Panel-SSH-User-Management/blob/main/README-EN.md#installation-guide';}
-if($obj->last_version>34) {
-    echo '
-            <div class="p-4 mb-2" style="position: fixed;z-index: 9999;left: 0;">
-              <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                  <img src="' . path . 'assets/images/xlogo.png" class="img-fluid m-r-5" alt="XPanel" style="width: 17px">
-                  <strong class="me-auto">XPanel</strong>
-                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">' . confirm_last_version_lang . ' <a href="'.$github.'" target="_blank">Github</a> </div>
-              </div>
-            </div>';
-}
-?>
 <div class="pc-container">
     <div class="pc-content">
         <!-- [ breadcrumb ] start -->
@@ -37,158 +18,46 @@ if($obj->last_version>34) {
 
         <!-- [ Main Content ] start -->
         <div class="row">
-            <div class="col-6 col-md-3 col-xxl-2">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                                <div class="my-n4" style="width: 130px">
-                                    <div id="total-earning-graph-cpu"></div>
-                                </div>
-                                <br>
-                                <h6 class="mb-1"><?php echo cpu_usage_lang;?></h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 col-xxl-2">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                                <div class="my-n4" style="width: 130px">
-                                    <div id="total-earning-graph-ram"></div>
-                                </div>
-                                <br>
-                                <h6 class="mb-1"><?php echo ram_usage_lang;?></h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-md-3 col-xxl-2">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                                <div class="my-n4" style="width: 130px">
-                                    <div id="total-earning-graph-hard"></div>
-                                </div>
-                                <br>
-                                <h6 class="mb-1"><?php echo disk_usage_lang;?></h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-md-3 col-xxl-2">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                                <div class="my-n4" style="width: 130px">
-                                    <h5 style="margin-top: 10px; text-align: center;"><small>Server</small><br><?php echo $data['single']['total'];?></h5>
-                                    <h5 style="margin-top: 10px; text-align: center;"><small>Client</small><br><?php echo $data['single']['traffic_total'];?></h5>
-                                </div>
-                                <br>
-                                <br>
-                                <h6 class="mb-1"><?php echo bandwidth_usage_lang;?></h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-xxl-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="my-3">
-                            <div id="overview-product-graph"></div>
-                        </div>
-                        <div class="row g-3 text-center">
-                            <div class="col-6 col-lg-4 col-xxl-4">
-                                <div class="overview-product-legends">
-                                    <p class="text-dark mb-1"><span><?php echo active_user_lang;?></span></p>
-                                    <h6 class="mb-0"><?php echo $data['single']['active_user'];?></h6>
-                                </div>
-                            </div>
-                            <div class="col-6 col-lg-4 col-xxl-4">
-                                <div class="overview-product-legends">
-                                    <p class="text-dark mb-1"><span><?php echo deactive_user_lang;?></span></p>
-                                    <h6 class="mb-0"><?php echo $data['single']['deactive_user'];?></h6>
-                                </div>
-                            </div>
-                            <div class="col-6 col-lg-4 col-xxl-4">
-                                <div class="overview-product-legends">
-                                    <p class="text-secondary mb-1"><span><?php echo online_user_lang;?></span></p>
-                                    <h6 class="mb-0"><?php echo substr_count($data['single']['online_user'], "\n");?></h6>
-                                </div>
-                            </div>
-                            <h6><?php echo all_users_lang;?>: <?php echo $data['single']['all_user'];?></h6>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header pb-0 pt-2">
-                        <?php echo high_consumption_lang;?>
-                    </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-12 col-xl-12">
-                                <ul class="list-group list-group-flush">
-                                    <?php
-                                    foreach ($data['for'] as $datum) {
+                                <h5><?php echo dashboard_desc1_lang;?></h5>
+                                <div><?php echo dashboard_desc2_lang;?></div>
+                                <div><?php echo dashboard_desc3_lang;?></div><br>
+                                <div class="bg-light-danger f-12 p-3"><?php echo dashboard_desc4_lang;?></div><br>
+                                <div class="bg-light-primary f-12 mt-2 p-3"><?php echo dashboard_desc5_lang;?></div>
+                                <div class="row">
+                                    <div class=" col-lg-3 bg-body p-3 rounded mt-2" style="margin-right: 4px;margin-left: 4px">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="flex-grow-1 ms-2">
+                                                <p class="mb-0">TRX <a href="javascript:void(0)" data-clipboard="true" data-clipboard-text="TYQraQ5JJXKyVD6BpTGoDYNhiLbFRfzVtV">copy</a>
+                                                </p>
 
-                                        if (1024 < $datum["total"]) {
-                                            $to = round($datum["total"] / 1024, 2) .' '.gib_lang;
-                                        } else {
-                                            $to = $datum["total"] .' '.mib_lang;
-                                        }
-                                        if(!empty($datum['finishdate'])) {
-                                            $finishdate = explode('-', $datum['finishdate']);
-                                            $finishdate = gregorian_to_jalali($finishdate[0], $finishdate[1], $finishdate[2]);
-                                            if ($finishdate[2] >= 10) {
-                                                $finishday = $finishdate[2];
-                                            } else {
-                                                $finishday = '0' . $finishdate[2];
-                                            }
-                                            if ($finishdate[1] >= 10) {
-                                                $finishmon = $finishdate[1];
-                                            } else {
-                                                $finishmon = '0' . $finishdate[1];
-                                            }
-                                            $finishdate = $finishday . '-' . $finishmon . '-' . $finishdate[0];
-                                        } else {$finishdate='';}
-
-                                        ?>
-                                        <li class="list-group-item">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <div class="avtar avtar-s bg-light-secondary">
-                                                        <i class="ti ti-chart-bar f-20"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <div class="row g-1">
-                                                        <div class="col-6">
-                                                            <p class="text-muted mb-1"><?php echo $datum['user'];?></p>
-                                                            <h6 class="mb-0"><?php echo expiration_lang;?>: <?php echo $finishdate;?></h6>
-                                                        </div>
-                                                        <div class="col-6 text-end">
-                                                            <h6 class="mb-1"><?php echo $to;?></h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
-                                        </li>
-                                    <?php }?>
-                                </ul>
+                                        </div>
+                                        <div class="mb-0 f-12">TYQraQ5JJXKyVD6BpTGoDYNhiLbFRfzVtV</div>
+                                    </div>
+                                    <div class=" col-lg-4 bg-body p-3 rounded mt-2"  style="margin-right: 4px;margin-left: 4px">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="flex-grow-1 ms-2">
+                                                <p class="mb-0">ETH <a href="javascript:void(0)" data-clipboard="true" data-clipboard-text="0x6cc08b2057EfAe4d76Af531e145DeEd4B73c9D7e">copy</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="mb-0 f-12">0x6cc08b2057EfAe4d76Af531e145DeEd4B73c9D7e</div>
+                                    </div>
+                                    <div class=" col-lg-4 bg-body p-3 rounded mt-2"  style="margin-right: 4px;margin-left: 4px">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="flex-grow-1 ms-2">
+                                                <p class="mb-0">Litecoin <a href="javascript:void(0)" data-clipboard="true" data-clipboard-text="ltc1q6gq4espx74lp6jvhmr0jmxlu4al0uwemmzwdv4">copy</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="mb-0 f-12">ltc1q6gq4espx74lp6jvhmr0jmxlu4al0uwemmzwdv4</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

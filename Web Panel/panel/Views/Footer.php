@@ -8,8 +8,8 @@
             <div class="col-auto my-1">
                 <ul class="list-inline footer-link mb-0">
                     <li class="list-inline-item"><a href="/panel/documents">API</a></li>
-                    <li class="list-inline-item"><a href="https://github.com/Alirezad07/X-Panel-SSH-User-Management/blob/main/README-EN.md#supporting-us-hearts">Supporting us</a></li>
-                    <li class="list-inline-item"><a href="https://github.com/Alirezad07/X-Panel-SSH-User-Management">GitHub</a></li>
+                    <li class="list-inline-item"><a href="https://github.com/Alirezad07/Xcs-Multi-Management-XPanel/tree/master#%D8%AD%D9%85%D8%A7%DB%8C%D8%AA-%D8%A7%D8%B2-%D9%85%D8%A7-hearts">Supporting us</a></li>
+                    <li class="list-inline-item"><a href="https://github.com/Alirezad07/Xcs-Multi-Management-XPanel">GitHub</a></li>
                 </ul>
             </div>
         </div>
