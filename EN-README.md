@@ -22,6 +22,7 @@
 ### Table of Contents
 - [Introduction](#introduction)<br>
 - [Installation](#installation) <br>
+- [SSL Activation](#ssl-activation-)<br>
 - [Support Us](#support-us-hearts)<br>
  
 ## Introduction <br>
