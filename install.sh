@@ -245,7 +245,7 @@ sudo chown -R www-data:www-data /var/www/html/app
 crontab -r
 wait
 multiin=$(echo "http://${ipv4}:$serverPort/fixer/exp")
-cat > /var/www/html/kill.sh << ENDOFFILE
+cat > /var/www/html/cron.sh << ENDOFFILE
 #!/bin/bash
 #By Alireza
 i=0
