@@ -1,4 +1,4 @@
-#!/bin/bash
+c#!/bin/bash
 
 RED="\e[31m"
 GREEN="\e[32m"
@@ -11,30 +11,39 @@ if [ "$EUID" -ne 0 ]
 then echo "Please run as root"
 exit
 fi
-rm -rf /error.log
-adminuser=$(mysql -N -e "use Xcs; select adminuser from setting where id='1';")
-adminpass=$(mysql -N -e "use Xcs; select adminpassword from setting where id='1';")
-clear
 
-linkd=https://api.github.com/repos/Alirezad07/Xcs-Multi-Management-XPanel/releases/latest
-
-if [ "$dmp" != "" ]; then
-defdomain=$dmp
-else
-defdomain=$(curl -sm8 ipv4.icanhazip.com)
+# php7.x is End of life https://www.php.net/supported-versions.php ubuntu bellow 20 is not supported by php8.1 in 2023
+if [ "$(uname)" == "Linux" ]; then
+    version_info=$(lsb_release -rs)
+    # Check if it's Ubuntu and version is below 20
+    if [ "$(lsb_release -is)" == "Ubuntu" ] && [ "$(echo "$version_info < 20" | bc)" -eq 1 ]; then
+        echo "This Script is using php8.1 and only supported in ubuntu 20 and above"
+        exit
+    fi
 fi
 
-if [ "$dmssl" == "True" ]; then
-protcohttp=https
+adminuser=$(mysql -N -e "use Xcs; select username from admins where permission='admin';")
+adminpass=$(mysql -N -e "use Xcs; select username from admins where permission='admin';")
 
+echo -e "${YELLOW}************ Select Xcs Version ************"
+echo -e "${GREEN}  1)Xcs v 1.0"
+echo -ne "${GREEN}\nSelect Version : ${ENDCOLOR}" ;read n
+if [ "$n" != "" ]; then
+if [ "$n" == "1" ]; then
+linkd=https://api.github.com/repos/xpanel-cp/Xcs-Multi-Management-XPanel/releases/tags/xcsv1-0
+fi
 else
-protcohttp=http
+linkd=https://api.github.com/repos/xpanel-cp/Xcs-Multi-Management-XPanel/releases/tags/xcsv1-0
 fi
 
-if [ "$adminuser" != "" ]; then
-adminusername=$adminuser
-adminpassword=$adminpass
-else
+echo -e "\nPlease input IP Server"
+printf "IP: "
+read ip
+if [ -n "$ip" -a "$ip" == " " ]; then
+echo -e "\nPlease input IP Server"
+printf "IP: "
+read ip
+fi
 adminusername=admin
 echo -e "\nPlease input Panel admin user."
 printf "Default user name is \e[33m${adminusername}\e[0m, let it blank to use this user name: "
@@ -50,74 +59,44 @@ if [[ -n "${passwordtmp}" ]]; then
 adminpassword=${passwordtmp}
 fi
 
-ipv4=$(curl -sm8 ipv4.icanhazip.com)
-sudo sed -i '/www-data/d' /etc/sudoers &
-wait
-sudo sed -i '/apache/d' /etc/sudoers &
-wait
+ipv4=$ip
 
 if command -v apt-get >/dev/null; then
+
 sudo NEETRESTART_MODE=a apt-get update --yes
 sudo apt-get -y install software-properties-common
+apt-get install -y stunnel4 && apt-get install -y cmake && apt-get install -y screenfetch && apt-get install -y openssl
+sudo apt-get -y install software-properties-common
 sudo add-apt-repository ppa:ondrej/php -y
-#sudo DEBIAN_FRONTEND=noninteractive apt-get install postfix -y
-apt-get install apache2 php7.4 zip unzip net-tools curl mariadb-server -y
-apt-get install php7.4-mysql php7.4-xml php7.4-curl -y
+apt-get install apache2 zip unzip net-tools curl mariadb-server -y
+apt-get install php php-cli php-mbstring php-dom php-pdo php-mysql -y
+apt-get install npm -y
+sudo apt-get install coreutils
+wait
+phpv=$(php -v)
+if [[ $phpv == *"8.1"* ]]; then
 
+apt autoremove -y
+  echo "PHP Is Installed :)"
+else
+rm -fr /etc/php/7.4/apache2/conf.d/00-ioncube.ini
+sudo apt-get purge '^php7.*' -y
+apt remove php* -y
+apt remove php -y
+apt autoremove -y
+apt install php8.1 php8.1-mysql php8.1-xml php8.1-curl cron -y
+fi
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer    
 
 link=$(sudo curl -Ls "$linkd" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/')
 sudo wget -O /var/www/html/update.zip $link
 sudo unzip -o /var/www/html/update.zip -d /var/www/html/ &
 wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/sbin/adduser' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/sbin/userdel' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/sed' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/passwd' | sudo EDITOR='tee -a' visudo &
-wait
 echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/curl' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/wget' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/unzip' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/kill' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/killall' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/lsof' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/sbin/lsof' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/htpasswd' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/sed' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/rm' | sudo EDITOR='tee -a' visudo &
 wait
 echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/crontab' | sudo EDITOR='tee -a' visudo &
 wait
 echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/mysqldump' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/sbin/reboot' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/sbin/mysql' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/mysql' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/netstat' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/pgrep' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/sbin/nethogs' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/nethogs' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/local/sbin/nethogs' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/sbin/iptables' | sudo EDITOR='tee -a' visudo &
 wait
 sudo a2enmod rewrite
 wait
@@ -131,42 +110,106 @@ sudo sed -i "s/AllowOverride None/AllowOverride All/g" /etc/apache2/apache2.conf
 wait
 sudo service apache2 restart
 wait
+clear
+# Random port number generator to prevent xcs detection by potential attackers
+randomPort=""
+# Check if $RANDOM is available in the shell
+if [ -z "$RANDOM" ]; then
+  # If $RANDOM is not available, use a different random number generation method
+  random_number=$(od -A n -t d -N 2 /dev/urandom | tr -d ' ')
+else
+  # Generate a random number between 0 and 63000 using $RANDOM
+  random_number=$((RANDOM % 63001))
+fi
 
+# Add 2000 to the random number to get a range between 2000 and 65000
+randomPort=$((random_number + 2000))
+
+# Use port 8081 if the random_number is zero (in case $RANDOM was not available and port 8081 was chosen)
+if [ "$random_number" -eq 0 ]; then
+  randomPort=8081
+fi
+
+
+echo -e "\nPlease input Panel admin Port, or leave blank to use randomly generated port"
+printf "Random port \033[33m$randomPort:\033[0m "
+read porttmp
+if [[ -n "${porttmp}" ]]; then
+#Get the server port number from my settings file
+serverPort=${porttmp}
+echo $serverPort
+else
+serverPort=$randomPort
+echo $serverPort
+fi
+##Get just the port number from the settings variable I just grabbed
+serverPort=${serverPort##*=}
+##Remove the "" marks from the variable as they will not be needed
+serverPort=${serverPort//'"'}
 echo "<VirtualHost *:80>
-          ServerAdmin webmaster@localhost
-          DocumentRoot /var/www/html
-          ErrorLog /error.log
-          CustomLog /access.log combined
-          <Directory '/var/www/html'>
-          AllowOverride All
-          </Directory>
-      </VirtualHost>
-      <VirtualHost *:443>
-          ServerAdmin webmaster@localhost
-          DocumentRoot /var/www/html
-          ErrorLog /error.log
-          CustomLog /access.log combined
-          <Directory '/var/www/html'>
-          AllowOverride All
-          </Directory>
-      </VirtualHost>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/example
+    ErrorLog /error.log
+    CustomLog /access.log combined
+    <Directory '/var/www/html/example'>
+    AllowOverride All
+    </Directory>
+</VirtualHost>
+
+<VirtualHost *:$serverPort>
+    # The ServerName directive sets the request scheme, hostname and port that
+    # the server uses to identify itself. This is used when creating
+    # redirection URLs. In the context of virtual hosts, the ServerName
+    # specifies what hostname must appear in the request's Host: header to
+    # match this virtual host. For the default virtual host (this file) this
+    # value is not decisive as it is used as a last resort host regardless.
+    # However, you must set it for any further virtual host explicitly.
+    #ServerName www.example.com
+
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/cp
+
+    # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+    # error, crit, alert, emerg.
+    # It is also possible to configure the loglevel for particular
+    # modules, e.g.
+    #LogLevel info ssl:warn
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    # For most configuration files from conf-available/, which are
+    # enabled or disabled at a global level, it is possible to
+    # include a line for only one particular virtual host. For example the
+    # following line enables the CGI configuration for this host only
+    # after it has been globally disabled with "a2disconf".
+    #Include conf-available/serve-cgi-bin.conf
+    <Directory '/var/www/html/cp'>
+    AllowOverride All
+    </Directory>
+
+</VirtualHost>
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet" > /etc/apache2/sites-available/000-default.conf
 wait
 ##Replace 'Virtual Hosts' and 'List' entries with the new port number
+sudo  sed -i.bak 's/.*NameVirtualHost.*/NameVirtualHost *:'$serverPort'/' /etc/apache2/ports.conf
 echo "Listen 80
+Listen $serverPort
 <IfModule ssl_module>
+    Listen $serverPort
     Listen 443
 </IfModule>
 
 <IfModule mod_gnutls.c>
+    Listen $serverPort
     Listen 443
 </IfModule>" > /etc/apache2/ports.conf
 wait
 ##Restart the apache server to use new port
 sudo /etc/init.d/apache2 reload
 sudo service apache2 restart
-chown www-data:www-data /var/www/html/* &
+chown www-data:www-data /var/www/html/cp/* &
 wait
 systemctl restart mariadb &
 wait
@@ -175,79 +218,9 @@ wait
 sudo phpenmod curl
 PHP_INI=$(php -i | grep /.+/php.ini -oE)
 sed -i 's/extension=intl/;extension=intl/' ${PHP_INI}
-elif command -v yum >/dev/null; then
-yum update -y
-sudo yum -y install https://rpms.remirepo.net/enterprise/remi-release-7.rpm
-sudo yum-config-manager --enable remi-php74 -y
-sudo yum install php php-cli -y
 
-yum install epel-release httpd zip unzip net-tools curl mariadb-server php-mysql php-mysqli php-xml mod_ssl php-curl -y
-systemctl restart httpd
-systemctl restart mariadb &
-wait
-systemctl enable mariadb &
-wait
-link=$(sudo curl -Ls "$linkd" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/')
-sudo wget -O /var/www/html/update.zip $link
-sudo unzip -o /var/www/html/update.zip -d /var/www/html/ &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/sbin/adduser' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/sbin/userdel' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/sed' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/passwd' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/curl' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/wget' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/unzip' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/kill' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/killall' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/lsof' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/sbin/lsof' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/htpasswd' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/sed' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/rm' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/crontab' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/mysqldump' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/sbin/reboot' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/sbin/mysql' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/mysql' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/netstat' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/pgrep' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/sbin/nethogs' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/local/sbin/nethogs' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/bin/nethogs' | sudo EDITOR='tee -a' visudo &
-wait
-echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/sbin/iptables' | sudo EDITOR='tee -a' visudo &
-wait
 systemctl restart httpd
 systemctl enable httpd
-chown apache:apache /var/www/html/* &
-wait
-sudo phpenmod curl
-PHP_INI=$(php -i | grep /.+/php.ini -oE)
-sed -i 's/extension=intl/;extension=intl/' ${PHP_INI}
 fi
 mysql -e "create database Xcs;" &
 wait
@@ -255,37 +228,51 @@ mysql -e "CREATE USER '${adminusername}'@'localhost' IDENTIFIED BY '${adminpassw
 wait
 mysql -e "GRANT ALL ON *.* TO '${adminusername}'@'localhost';" &
 wait
-sudo sed -i "s/adminuser/$adminusername/g" /var/www/html/panel/Config/database.php &
+sed -i "s/DB_USERNAME=.*/DB_USERNAME=$adminusername/g" /var/www/html/app/.env
+sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=$adminpassword/g" /var/www/html/app/.env
+cd /var/www/html/app
+php artisan migrate
+if [ -n "$adminuser" -a "$adminuser" != "NULL" ]
+then
+ mysql -e "USE Xcs; UPDATE admins SET username = '${adminusername}' where permission='admin';"
+ mysql -e "USE Xcs; UPDATE admins SET password = '${adminpassword}' where permission='admin';"
+ mysql -e "USE Xcs; UPDATE settings SET ssh_port = '1' where id='1';"
+else
+mysql -e "USE Xcs; INSERT INTO admins (username, password, permission, credit, status) VALUES ('${adminusername}', '${adminpassword}', 'admin', '', 'active');"
+mysql -e "USE Xcs; INSERT INTO settings (ssh_port, tls_port, t_token, t_id, language, multiuser, ststus_multiuser, home_url) VALUES ('1', '1', '', '', '', 'active', '', 'localhost');"
+fi
+sudo chown -R www-data:www-data /var/www/html/app
+crontab -r
 wait
-sudo sed -i "s/adminpass/$adminpassword/g" /var/www/html/panel/Config/database.php &
+multiin=$(echo "http://${ipv4}:$serverPort/fixer/exp")
+cat > /var/www/html/kill.sh << ENDOFFILE
+#!/bin/bash
+#By Alireza
+i=0
+while [ 1i -lt 20 ]; do
+cmd=(bbh '$multiin')
+echo cmd &
+sleep 30
+i=(( i + 1 ))
+done
+ENDOFFILE
 wait
-sudo sed -i "s/SERVERUSER/$adminusername/g" /var/www/html/panel/Libs/sh/killusers.sh &
+sudo sed -i 's/(bbh/$(curl -v -H "A: B"/' /var/www/html/cron.sh
 wait
-sudo sed -i "s/SERVERPASSWORD/$adminpassword/g" /var/www/html/panel/Libs/sh/killusers.sh &
+sudo sed -i 's/cmd/$cmd/' /var/www/html/cron.sh
 wait
-curl -u "$adminusername:$adminpassword" "$protcohttp://${defdomain}/panel/reinstall"
+sudo sed -i 's/1i/$i/' /var/www/html/cron.sh
 wait
-
-chmod 777 /var/www/html/panel/storage
+sudo sed -i 's/((/$((/' /var/www/html/cron.sh
 wait
-chmod 777 /var/www/html/panel/storage/log
+chmod +x /var/www/html/cron.sh
 wait
-chmod 777 /var/www/html/panel/storage/backup
+(crontab -l | grep . ; echo -e "* * * * * /var/www/html/cron.sh") | crontab -
 wait
-chmod 777 /var/www/html/panel/Config/database.php
-wait
-chmod 777 /var/www/html/panel/Config/define.php
-wait
-chmod 777 /var/www/html/panel/Libs
-wait
-chmod 777 /var/www/html/panel/Libs/sh
-wait
-chmod 777 /var/www/html/panel/assets/js/config.js
-wait
-curl $protcohttp://${defdomain}/panel/reinstall
+chown www-data:www-data /var/www/html/example/index.php
 clear
 
-echo -e "************ Xcs Multi Management of XPanel ************ "
-echo -e "Xcs Panel : $protcohttp://${defdomain}/panel/login "
-echo -e "Username : ${adminusername} "
-echo -e "Password : ${adminpassword} "
+echo -e "************ Xcs ************ \n"
+echo -e "Xcs Link : http://${ipv4}:$serverPort/login"
+echo -e "Username : ${adminusername}"
+echo -e "Password : ${adminpassword}"
