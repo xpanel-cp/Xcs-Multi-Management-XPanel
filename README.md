@@ -68,4 +68,7 @@ Storage: At least 20 GB<br>
 bash <(curl -Ls https://raw.githubusercontent.com/xpanel-cp/Xcs-Multi-Management-XPanel/master/install.sh --ipv4)
 ```
 <br>
-<br>
+
+## فهال سازی SSL <br>
+برای فعال سازی SSL از CDN هایی مانند Cloudflare استفاده نمائید. بعد از اتصال دامنه از طریق CDN  به IP سرور پروکسی CDN را فعال کنید تا اتصال با HTTPS برقرار شود.<BR>
+ توجه داشته باشید که برای انجام این مورد باید یکی از پورت های مجاز CDN  را برای پورت ورود به پنل تنظیم کنید. (پورت 80 و 443 به هیچ وجه انتخاب نشود)
