@@ -24,7 +24,7 @@ fi
 
 adminuser=$(mysql -N -e "use Xcs; select username from admins where permission='admin';")
 adminpass=$(mysql -N -e "use Xcs; select username from admins where permission='admin';")
-
+clear
 echo -e "${YELLOW}************ Select Xcs Version ************"
 echo -e "${GREEN}  1)Xcs v 1.0"
 echo -ne "${GREEN}\nSelect Version : ${ENDCOLOR}" ;read n
