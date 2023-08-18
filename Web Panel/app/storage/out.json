@@ -1,0 +1,9 @@
+Adding local address: 185.186.78.80
+Adding local address: fe80::216:3eff:fef7:bfa9
+Ethernet link detected
+[{"name":"unknown TCP","PID":0,"UID":0,"RX":0.000000,"TX":0.000000 }]
+[{"name":"unknown TCP","PID":0,"UID":0,"RX":0.000269,"TX":0.000282 },{"name":"sshd: root@pts/0","PID":1003489,"UID":0,"RX":0.000170,"TX":0.000113 }]
+[{"name":"sshd: root@pts/0","PID":1003489,"UID":0,"RX":0.001776,"TX":0.022984 },{"name":"unknown TCP","PID":0,"UID":0,"RX":0.000538,"TX":0.000706 },{"name":"sshd: tt","PID":923496,"UID":1000,"RX":0.000401,"TX":0.000778 }]
+[{"name":"sshd: root@pts/0","PID":1003489,"UID":0,"RX":0.002701,"TX":0.023802 },{"name":"unknown TCP","PID":0,"UID":0,"RX":0.001345,"TX":0.001200 },{"name":"sshd: tt","PID":923496,"UID":1000,"RX":0.000801,"TX":0.001556 }]
+[{"name":"sshd: root@pts/0","PID":1003489,"UID":0,"RX":0.003563,"TX":0.024557 },{"name":"unknown TCP","PID":0,"UID":0,"RX":0.001345,"TX":0.001482 },{"name":"sshd: tt","PID":923496,"UID":1000,"RX":0.001202,"TX":0.002335 }]
+[{"name":"sshd: root@pts/0","PID":1003489,"UID":0,"RX":0.004496,"TX":0.025383 },{"name":"sshd: tt","PID":923496,"UID":1000,"RX":0.001602,"TX":0.003113 },{"name":"unknown TCP","PID":0,"UID":0,"RX":0.001345,"TX":0.001694 }]
