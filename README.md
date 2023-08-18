@@ -1,12 +1,12 @@
 <p align="center">
 <picture>
-<img width="160" height="160"  alt="XPanel" src="https://raw.githubusercontent.com/Alirezad07/Xcs-Multi-Management-XPanel/master/xcslogo.png">
+<img width="160" height="160"  alt="Xcs" src="https://raw.githubusercontent.com/xpanel-cp/Xcs-Multi-Management-XPanel/master/xcslogo.png">
 </picture>
   </p> 
 <h1 align="center"/>Xcs</h1>
 <h6 align="center">Xcs Multi Management XPanel<h6>
 <p align="center">
-<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/Alirezad07/Xcs-Multi-Management-XPanel">
+<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/xpanel-cp/Xcs-Multi-Management-XPanel">
 </p>
  
 <p align="center">
