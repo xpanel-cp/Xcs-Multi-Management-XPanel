@@ -10,7 +10,7 @@
 </p>
  
 <p align="center">
-	<a href="./README.md">
+	<a href="./EN-README.md">
 	English
 	</a>
 	/
