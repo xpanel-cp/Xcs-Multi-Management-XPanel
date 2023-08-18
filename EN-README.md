@@ -67,4 +67,7 @@ To install, simply run the following command<br>
 bash <(curl -Ls https://raw.githubusercontent.com/xpanel-cp/Xcs-Multi-Management-XPanel/master/install.sh --ipv4)
 ```
 <br>
-<br>
+
+## SSL Activation <br>
+To activate SSL, use CDNs such as Cloudflare. After connecting your domain via a CDN, enable CDN proxy for the server's IP to establish a connection with HTTPS.<br>
+Please note that for this to work, you must set one of the authorized CDN ports for the panel's entry port. (Ports 80 and 443 should not be selected under any circumstances)
