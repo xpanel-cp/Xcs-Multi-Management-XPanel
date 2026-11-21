@@ -39,7 +39,7 @@ class OnlineController extends Controller
         if (!is_string($username)) {
             abort(400, 'Not Valid Username');
         }
-        Process::run("sudo killall -u {$username}");
+        Process::run(['sudo', 'killall', '-u', $username]);
         return redirect()->back()->with('success', 'Killed');
     }
     public function index()
